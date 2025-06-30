@@ -1,4 +1,6 @@
 // In boringssl_ffi/example/lib/main.dart
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -18,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _boringSslVersion = 'Unknown';
-  final _boringsslFfiPlugin = BoringSslFFI();
+  String _boringSslsha256 = 'Unknown';
 
   @override
   void initState() {
@@ -29,10 +31,13 @@ class _MyAppState extends State<MyApp> {
   // A simple method to call our plugin and update the UI.
   Future<void> initPlatformState() async {
     String version;
+    String sha256;
     try {
-      version = _boringsslFfiPlugin.getVersion();
+      version = BoringSslFFI.getVersion();
+      sha256 = BoringSslFFI.hex_encode(BoringSslFFI.SHA256([1,2,3])??[]);
     } catch (e) {
       version = 'Failed to get version: ${e.toString()}';
+      sha256 = 'Failed to get SHA256: ${e.toString()}';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -42,6 +47,7 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       _boringSslVersion = version;
+      _boringSslsha256 = sha256;
     });
   }
 
@@ -63,6 +69,16 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(height: 16),
               Text(
                 _boringSslVersion,
+                style: const TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              const Text(
+                'BoringSSL SHA256([1,2,3]):',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                _boringSslsha256,
                 style: const TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),

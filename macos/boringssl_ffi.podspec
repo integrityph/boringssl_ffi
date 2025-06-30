@@ -59,7 +59,7 @@ A new Flutter FFI plugin project.
     <key>CFBundleExecutable</key>
     <string>${FRAMEWORK_NAME}</string>
     <key>CFBundleIdentifier</key>
-    <string>com.example.boringssl_ffi</string>
+    <string>ph.integritynet.boringssl_ffi</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>

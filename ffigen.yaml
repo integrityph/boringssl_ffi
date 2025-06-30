@@ -1,19 +1,136 @@
-# Run with `dart run ffigen --config ffigen.yaml`.
-name: BoringsslFfiBindings
-description: |
-  Bindings for `src/boringssl_ffi.h`.
+# # Run with `dart run ffigen --config ffigen.yaml`.
+# name: BoringsslFfiBindings
+# description: |
+#   Bindings for `src/boringssl_ffi.h`.
 
-  Regenerate bindings with `dart run ffigen --config ffigen.yaml`.
-output: 'lib/boringssl_ffi_bindings_generated.dart'
+#   Regenerate bindings with `dart run ffigen --config ffigen.yaml`.
+# output: 'lib/boringssl_ffi_bindings_generated.dart'
+# headers:
+#   entry-points:
+#     - 'src/boringssl_ffi.h'
+#   include-directives:
+#     - 'src/boringssl_ffi.h'
+# preamble: |
+#   // ignore_for_file: always_specify_types
+#   // ignore_for_file: camel_case_types
+#   // ignore_for_file: non_constant_identifier_names
+# comments:
+#   style: any
+#   length: full
+
+# The name of the generated class.
+name: BoringSSLBindings
+
+# Description for your reference.
+description: |
+  Direct FFI bindings to the BoringSSL library.
+  Generated from the version specified in CMakeLists.txt.
+
+# Output file for the generated Dart code.
+output: 'lib/boringssl_bindings.dart'
+
+# --- The Key Change ---
+# Point all paths to the directory created by CMake's FetchContent.
+# This assumes your build directory is named 'build'.
 headers:
   entry-points:
-    - 'src/boringssl_ffi.h'
+    # Path is now relative to the project root, into the build directory
+    - 'src/build/_deps/boringssl-src/include/openssl/base64.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/bio.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/buf.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/bytestring.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/err.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/crypto.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/ex_data.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/mem.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/obj.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/pool.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/posix_time.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/rand.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/stack.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/aes.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/bn.h'
+
+    - 'src/build/_deps/boringssl-src/include/openssl/chacha.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/cmac.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/curve25519.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/des.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/dh.h'
+
+    - 'src/build/_deps/boringssl-src/include/openssl/dsa.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/ec.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/ec_key.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/ecdh.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/ecdsa.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/engine.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/hkdf.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/hmac.h'
+
+    - 'src/build/_deps/boringssl-src/include/openssl/md5.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/mldsa.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/mlkem.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/rc4.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/rsa.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/sha.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/siphash.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/digest.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/cipher.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/aead.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/evp.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/hpke.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/kdf.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/kyber.h'
+    # - 'src/build/_deps/boringssl-src/include/openssl/ssl.h'
+
   include-directives:
-    - 'src/boringssl_ffi.h'
+    - 'src/build/_deps/boringssl-src/include/**/*.h'
+
+# Update the compiler options to use the same path.
+compiler-opts:
+  - '-Isrc/build/_deps/boringssl-src/include'
+  - '-DBORINGSSL_SHARED_LIBRARY=1'
+  - '-DBORINGSSL_IMPLEMENTATION=1'
+  - '-Ddoesnt_exist=0'
+  - '-DBORINGSSL_NO_CXX=1'
+  - '-DERR_LIB_DSO=0'
+  - '-DERR_LIB_STORE=0'
+  - '-DERR_LIB_FIPS=0'
+  - '-DERR_LIB_TS=0'
+  - '-DERR_LIB_JPAKE=0'
+  - '-DBORINGSSL_PREFIX=BSLL'
+  - '-DBORINGSSL_PREFIX_SYMBOLS=symbols.txt'
+
+# --- Filtering (Highly Recommended) ---
+functions:
+  include:
+    - '.*'
+
+  exclude:
+    - '.*_test'
+
+structs:
+  include:
+    - '.*'
+
+unions:
+  include:
+    - '.*'
+
+macros:
+  include:
+    - '.*'
+  #   - '__attribute_deprecated__'
+  #   - '__attribute_deprecated_msg__'
+  #   - '.*attribute.*'
+  # exclude:
+  #   - 'BSSL_NAMESPACE_BEGIN'
+  #   - 'BSSL_NAMESPACE_END'
+  #   - 'BORINGSSL_MAKE_DELETER'
+  #   - 'BORINGSSL_MAKE_UP_REF'
+
+# --- Preamble and Comments ---
 preamble: |
-  // ignore_for_file: always_specify_types
-  // ignore_for_file: camel_case_types
-  // ignore_for_file: non_constant_identifier_names
+  // ignore_for_file: non_constant_identifier_names, camel_case_types, unnecessary_brace_in_string_interps
 comments:
-  style: any
-  length: full
+  style: doxygen
+  length: brief

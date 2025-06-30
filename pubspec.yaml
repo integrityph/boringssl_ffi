@@ -1,5 +1,5 @@
 name: boringssl_ffi
-description: "A new Flutter FFI plugin project."
+description: "BoringSSL FFI Plugin"
 version: 0.0.1
 homepage:
 
@@ -14,7 +14,6 @@ dependencies:
   ffi: ^2.1.3
 
 dev_dependencies:
-  ffi: ^2.1.3
   ffigen: ^13.0.0
   flutter_test:
     sdk: flutter
@@ -49,14 +48,6 @@ flutter:
         ffiPlugin: true
       windows:
         ffiPlugin: true
-    # This FFI plugin project was generated without specifying any
-    # platforms with the `--platform` argument. If you see the `some_platform` map below, remove it and
-    # then add platforms following the instruction here:
-    # https://flutter.dev/to/pubspec-plugin-platforms
-    # -------------------
-      some_platform:
-        ffiPlugin: true
-    # -------------------
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
