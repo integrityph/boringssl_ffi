@@ -1,0 +1,22 @@
+PODS:
+  - boringssl_ffi (0.0.0):
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
+
+DEPENDENCIES:
+  - boringssl_ffi (from `Flutter/ephemeral/.symlinks/plugins/boringssl_ffi/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+
+EXTERNAL SOURCES:
+  boringssl_ffi:
+    :path: Flutter/ephemeral/.symlinks/plugins/boringssl_ffi/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+
+SPEC CHECKSUMS:
+  boringssl_ffi: 3fbbe4f0a00c39ce8f1fa125531e7a731c63707b
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+
+PODFILE CHECKSUM: b7bfeccbcb1bcb639a12b320be56fca4e9da8d15
+
+COCOAPODS: 1.16.2

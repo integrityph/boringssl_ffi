@@ -1,0 +1,143 @@
+platform :osx, '10.14'
+
+# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+project 'Runner', {
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+}
+
+def flutter_root
+  generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'ephemeral', 'Flutter-Generated.xcconfig'), __FILE__)
+  unless File.exist?(generated_xcode_build_settings_path)
+    raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure \"flutter pub get\" is executed first"
+  end
+
+  File.foreach(generated_xcode_build_settings_path) do |line|
+    matches = line.match(/FLUTTER_ROOT\=(.*)/)
+    return matches[1].strip if matches
+  end
+  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Flutter-Generated.xcconfig, then run \"flutter pub get\""
+end
+
+require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+
+flutter_macos_podfile_setup
+
+target 'Runner' do
+  use_frameworks!
+
+  flutter_install_all_macos_pods File.dirname(File.realpath(__FILE__))
+  target 'RunnerTests' do
+    inherit! :search_paths
+  end
+end
+
+# post_install do |installer|
+#   installer.pods_project.targets.each do |target|
+#     flutter_additional_macos_build_settings(target)
+
+#     target.build_phases.each do |build_phase|
+#       if build_phase.is_a?(Xcodeproj::Project::Object::PBXShellScriptBuildPhase) && # It's a shell script phase
+#          build_phase.shell_script.include?("rsync") && # The script uses rsync
+#          build_phase.shell_script.include?("boringssl_ffi.framework") # And it's for your framework
+
+#         # Remove the filters that exclude Headers, PrivateHeaders, and Modules
+#         build_phase.shell_script = build_phase.shell_script.gsub('--filter "- Headers"', '')
+#         build_phase.shell_script = build_phase.shell_script.gsub('--filter "- PrivateHeaders"', '')
+#         build_phase.shell_script = build_phase.shell_script.gsub('--filter "- Modules"', '')
+
+#         # OPTIONAL: Add verbose flag to rsync for more detailed output during future builds
+#         build_phase.shell_script = build_phase.shell_script.gsub('rsync', 'rsync -vv')
+
+#         puts "DEBUG: Modified rsync filter for #{target.name}'s build phase to include boringssl_ffi.framework headers."
+#       end
+#     end
+#   end
+# end
+
+ post_install do |installer|
+  puts "\n--- DEBUGGING POST_INSTALL HOOK ---"
+
+  main_project_path = File.join(File.dirname(installer.pods_project.path), '..', 'Runner.xcodeproj')
+  
+  begin
+    main_project = Xcodeproj::Project.open(main_project_path)
+  rescue => e
+    puts "DEBUG: ERROR: Failed to open main project at '#{main_project_path}'. Error: #{e.message}"
+    puts "DEBUG: Skipping modifications to Runner.xcodeproj build phases."
+    main_project = nil
+  end
+
+  if main_project
+    runner_target = main_project.targets.find { |target| target.name == "Runner" }
+
+    if runner_target
+      puts "DEBUG: Found main Runner target: '#{runner_target.name}'. Processing its build phases."
+      flutter_additional_macos_build_settings(runner_target)
+
+      # --- CRITICAL FIX: Directly modify the Pods-Runner-frameworks.sh script ---
+      # This script is sourced by the '[CP] Embed Pods Frameworks' build phase.
+      frameworks_script_dir = File.join(installer.pods_project.path, '..', 'Target Support Files', 'Pods-Runner')
+      frameworks_script_path = File.join(frameworks_script_dir, 'Pods-Runner-frameworks.sh')
+      
+      if File.exist?(frameworks_script_path)
+        puts "DEBUG: Found Pods-Runner-frameworks.sh at: #{frameworks_script_path}"
+        script_content = File.read(frameworks_script_path)
+        
+        # Original filters to remove (these are usually in the rsync command in this file)
+        original_filters = ['--filter "- Headers"', '--filter "- PrivateHeaders"', '--filter "- Modules"']
+        modified_content = script_content
+        
+        # Original filters removal (already working)
+        original_filters.each do |filter|
+          if modified_content.include?(filter)
+            modified_content = modified_content.gsub(filter, '')
+            puts "DEBUG: Removed filter: #{filter}"
+          end
+        end
+
+        # Add verbose flag to rsync (optional, but good for future debugging)
+        modified_content = modified_content.gsub('rsync', 'rsync -vv')
+
+        # === CRITICAL NEW LINES: Make codesign extremely verbose ===
+        # Target the general 'codesign' command and add maximum verbosity
+        modified_content = modified_content.gsub('codesign ', 'codesign -vvvvv ') # Add five 'v's for max verbosity
+        # Also target the specific signing pattern if present:
+        modified_content = modified_content.gsub('codesign --force --sign -', 'codesign --force --sign - -vvvvv')
+        # =========================================================
+
+        if script_content != modified_content
+          File.write(frameworks_script_path, modified_content)
+          puts "DEBUG: Successfully modified Pods-Runner-frameworks.sh to remove filters and add verbosity."
+        else
+          puts "DEBUG: Pods-Runner-frameworks.sh identified, but no changes needed/made (filters or codesign verbosity)."
+        end
+      else
+        puts "DEBUG: WARNING: Pods-Runner-frameworks.sh not found at: #{frameworks_script_path}. Cannot modify rsync filters directly."
+      end
+      # --- END CRITICAL FIX ---
+
+      # Remove any custom header copy phase we might have added previously,
+      # as we are now directly modifying the source of the rsync.
+      runner_target.shell_script_build_phases.reject! { |phase| phase.name == 'Copy boringssl_ffi Headers' }
+      puts "DEBUG: Removed custom 'Copy boringssl_ffi Headers' phase (if it existed from previous attempts)."
+
+      main_project.save 
+      puts "DEBUG: Saved changes to Runner.xcodeproj."
+
+    else
+      puts "DEBUG: WARNING: Could not find main 'Runner' target in the project at path #{main_project_path}."
+    end
+  else
+    puts "DEBUG: Main project object is nil, skipping target processing."
+  end
+
+  installer.pods_project.targets.each do |pod_target|
+    puts "DEBUG: Processing Pods project target: #{pod_target.name}"
+  end
+
+  puts "--- END DEBUGGING POST_INSTALL HOOK ---"
+end
