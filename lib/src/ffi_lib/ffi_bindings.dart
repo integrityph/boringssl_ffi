@@ -20,7 +20,7 @@ class _FFIBindings {
     try {
       if (Platform.isMacOS || Platform.isIOS) {
         // For Apple platforms, the FFI plugin system builds a framework.
-        return ffi.DynamicLibrary.open('boringssl_ffi.framework/boringssl_ffi');
+        return ffi.DynamicLibrary.open('$_libName.framework/$_libName');
       }
       if (Platform.isAndroid || Platform.isLinux) {
         // For Linux and Android, it's a standard shared object.
