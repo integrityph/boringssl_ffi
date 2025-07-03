@@ -3,9 +3,6 @@ part of 'aes.dart';
 const _aes_cfb = AES_CFB();
 
 class AES_CFB {
-  static const AES_ENCRYPT = 1;
-  static const AES_DECRYPT = 0;
-  static const BLOCK_SIZE = 16;
   const AES_CFB();
 
   ({Uint8List cipher, int num})? encrypt(
@@ -14,7 +11,7 @@ class AES_CFB {
     List<int> ivec,
     int num,
   ) {
-    return _encrypt(data, key, ivec, num, AES_ENCRYPT);
+    return _encrypt(data, key, ivec, num, AES.AES_ENCRYPT);
   }
 
   ({Uint8List cipher, int num})? decrypt(
@@ -23,7 +20,7 @@ class AES_CFB {
     List<int> ivec,
     int num,
   ) {
-    return _encrypt(data, key, ivec, num, AES_DECRYPT);
+    return _encrypt(data, key, ivec, num, AES.AES_DECRYPT);
   }
 
   ({Uint8List cipher, int num})? _encrypt(

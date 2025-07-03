@@ -14,6 +14,9 @@ part 'aes_cfb.dart';
 const aes = AES();
 
 class AES {
+  static const AES_ENCRYPT = 1;
+  static const AES_DECRYPT = 0;
+  static const BLOCK_SIZE = 16;
   const AES();
 
   AES_CTR get ctr {
