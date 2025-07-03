@@ -1,9 +1,9 @@
-part of 'aes.dart';
+part of 'aes_main.dart';
 
-const _aes_cfb = AES_CFB();
+const _aes_ofb = AES_OFB();
 
-class AES_CFB {
-  const AES_CFB();
+class AES_OFB {
+  const AES_OFB();
 
   ({Uint8List cipher, int num})? encrypt(
     List<int> data,
@@ -11,7 +11,7 @@ class AES_CFB {
     List<int> ivec,
     int num,
   ) {
-    return _encrypt(data, key, ivec, num, AES.AES_ENCRYPT);
+    return _encrypt(data, key, ivec, num);
   }
 
   ({Uint8List cipher, int num})? decrypt(
@@ -20,7 +20,7 @@ class AES_CFB {
     List<int> ivec,
     int num,
   ) {
-    return _encrypt(data, key, ivec, num, AES.AES_DECRYPT);
+    return _encrypt(data, key, ivec, num);
   }
 
   ({Uint8List cipher, int num})? _encrypt(
@@ -28,7 +28,6 @@ class AES_CFB {
     List<int> key,
     List<int> ivec,
     int num,
-    int enc
   ) {
     return arenaWrapper((Arena arena) {
       final ffi.Pointer<ffi.Uint8> inputPtr = arena.allocate<ffi.Uint8>(
@@ -48,11 +47,13 @@ class AES_CFB {
       final keyPtr = aes._makeEncryptKey(arena, key);
 
       if (keyPtr == null) {
-        log.log("AES_CFB._decrypt: unable to encrypt, key creation failed");
+        log.log("AES_OFB.encrypt: unable to encrypt, key creation failed");
         return null;
       }
 
-      final ffi.Pointer<ffi.Uint8> ivecPtr = arena.allocate<ffi.Uint8>(ivec.length);
+      final ffi.Pointer<ffi.Uint8> ivecPtr = arena.allocate<ffi.Uint8>(
+        ivec.length,
+      );
       ivecPtr.asTypedList(ivec.length).setAll(0, ivec);
 
       final ffi.Pointer<ffi.Int> numPtr = arena.allocate<ffi.Int>(
@@ -62,19 +63,18 @@ class AES_CFB {
 
       // Call the native function.
       // It returns a pointer to the output buffer on success, or NULL on failure.
-      ffiBindings.AES_cfb128_encrypt(
+      ffiBindings.AES_ofb128_encrypt(
         inputPtr,
         outputPtr,
         data.length,
         keyPtr,
         ivecPtr,
         numPtr,
-        enc,
       );
 
       // validate results
       if (outputPtr == ffi.nullptr) {
-        log.log("AES_CFB._decrypt: null output");
+        log.log("AES_OFB.encrypt: null output");
         return null;
       }
 
