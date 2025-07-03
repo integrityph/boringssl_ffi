@@ -27,7 +27,7 @@ description: |
   Generated from the version specified in CMakeLists.txt.
 
 # Output file for the generated Dart code.
-output: 'lib/boringssl_bindings.dart'
+output: 'lib/src/bindings/bindings.dart'
 
 # --- The Key Change ---
 # Point all paths to the directory created by CMake's FetchContent.
@@ -119,18 +119,10 @@ unions:
 macros:
   include:
     - '.*'
-  #   - '__attribute_deprecated__'
-  #   - '__attribute_deprecated_msg__'
-  #   - '.*attribute.*'
-  # exclude:
-  #   - 'BSSL_NAMESPACE_BEGIN'
-  #   - 'BSSL_NAMESPACE_END'
-  #   - 'BORINGSSL_MAKE_DELETER'
-  #   - 'BORINGSSL_MAKE_UP_REF'
 
 # --- Preamble and Comments ---
 preamble: |
-  // ignore_for_file: non_constant_identifier_names, camel_case_types, unnecessary_brace_in_string_interps
+  // ignore_for_file: non_constant_identifier_names, camel_case_types, unnecessary_brace_in_string_interps, unused_field
 comments:
   style: doxygen
   length: brief

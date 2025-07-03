@@ -1,0 +1,11 @@
+dartdoc:
+  # categories:
+  #   awesome:
+  #     markdown: doc/First.md
+  #     displayName: Awesome
+  #   great:
+  #     markdown: doc/Second.md
+  #     displayName: Great
+  # categoryOrder: [awesome, great]
+  # includeExternal: ['bin/unusually_located_library.dart']
+  # exclude: ['lib/bindings/*.*', 'lib/ffi_lib/**', 'lib/encoding/**', 'lib/logging/**']

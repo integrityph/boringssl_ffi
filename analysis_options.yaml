@@ -1,4 +1,11 @@
 include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    constant_identifier_names: ignore
+    library_private_types_in_public_api: ignore
+  exclude:
+    - 'lib/bindings/**'
+    - 'lib/ffi_lib/**'
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

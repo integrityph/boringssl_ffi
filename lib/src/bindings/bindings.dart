@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, camel_case_types, unnecessary_brace_in_string_interps
+// ignore_for_file: non_constant_identifier_names, camel_case_types, unnecessary_brace_in_string_interps, unused_field
 
 // AUTO GENERATED FILE, DO NOT EDIT.
 //

@@ -14,6 +14,7 @@ set(BUILD_TESTING OFF CACHE BOOL "")
 # into collections of object files (.o) instead of static libraries (.a).
 set(BORINGSSL_CRYPTO_LIBRARY_TYPE OBJECT)
 set(BORINGSSL_SSL_LIBRARY_TYPE OBJECT)
+set(BORINGSSL_FIPSMODULE_LIBRARY_TYPE OBJECT) #fipsmodule
 
 find_package(Threads REQUIRED)
 
@@ -26,6 +27,7 @@ FetchContent_MakeAvailable(boringssl)
 
 target_compile_definitions(crypto PRIVATE BORINGSSL_SHARED_LIBRARY=1 BORINGSSL_IMPLEMENTATION=1)
 target_compile_definitions(ssl PRIVATE BORINGSSL_SHARED_LIBRARY=1 BORINGSSL_IMPLEMENTATION=1)
+target_compile_definitions(fipsmodule PRIVATE BORINGSSL_SHARED_LIBRARY=1 BORINGSSL_IMPLEMENTATION=1)
 
 message("CMAKE_BINARY_DIR:")
 message(${CMAKE_BINARY_DIR})
@@ -33,6 +35,7 @@ message(${CMAKE_BINARY_DIR})
 add_library(boringssl_ffi SHARED
     $<TARGET_OBJECTS:crypto>
     $<TARGET_OBJECTS:ssl>
+		$<TARGET_OBJECTS:fipsmodule>
 )
 
 # We still need to make the include directory available.
@@ -43,6 +46,7 @@ target_include_directories(boringssl_ffi PRIVATE
 target_link_libraries(boringssl_ffi PRIVATE
     ssl
     crypto
+		fipsmodule
     Threads::Threads # BoringSSL also depends on pthreads, which CMake abstracts as Threads::Threads
 )
 

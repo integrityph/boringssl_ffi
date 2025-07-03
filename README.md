@@ -1,6 +1,6 @@
 # boringssl_ffi
 
-A new Flutter FFI plugin project.
+BoringSSL FFI Plugin
 
 ## Getting Started
 

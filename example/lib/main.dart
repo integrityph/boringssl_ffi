@@ -1,10 +1,6 @@
-// In boringssl_ffi/example/lib/main.dart
-import 'dart:typed_data';
-
+import 'package:boringssl_ffi_example/benchmarks/sha256/sha256.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-
-// Import our plugin's main file.
 import 'package:boringssl_ffi/boringssl_ffi.dart';
 
 void main() {
@@ -21,6 +17,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _boringSslVersion = 'Unknown';
   String _boringSslsha256 = 'Unknown';
+  String _boringSslsha256Benchmark = 'Unknown';
 
   @override
   void initState() {
@@ -30,24 +27,21 @@ class _MyAppState extends State<MyApp> {
 
   // A simple method to call our plugin and update the UI.
   Future<void> initPlatformState() async {
-    String version;
-    String sha256;
+    String versionVal;
+    String sha256Val;
     try {
-      version = BoringSslFFI.getVersion();
-      sha256 = BoringSslFFI.hex_encode(BoringSslFFI.SHA256([1,2,3])??[]);
+      versionVal = "XXX";
+      sha256Val = hex.encode(sha256.hash([1,2,3])??[]);
     } catch (e) {
-      version = 'Failed to get version: ${e.toString()}';
-      sha256 = 'Failed to get SHA256: ${e.toString()}';
+      versionVal = 'Failed to get version: ${e.toString()}';
+      sha256Val = 'Failed to get SHA256: ${e.toString()}';
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
-      _boringSslVersion = version;
-      _boringSslsha256 = sha256;
+      _boringSslVersion = versionVal;
+      _boringSslsha256 = sha256Val;
     });
   }
 
@@ -82,6 +76,13 @@ class _MyAppState extends State<MyApp> {
                 style: const TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
+              OutlinedButton(onPressed: ()async {
+                final v = await benchmarkSHA256(1_000_000);
+                setState(() {
+                  _boringSslsha256Benchmark = "${v.toStringAsFixed(2)} µs";
+                });
+              }, child: Text("Benchmark")),
+              Row(children:[Text("Benchmark (1M):"), Text(_boringSslsha256Benchmark)]),
             ],
           ),
         ),
