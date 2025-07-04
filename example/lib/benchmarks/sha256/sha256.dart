@@ -14,7 +14,6 @@ Future<double> benchmarkSHA256(int iterations) async {
 
   List<double> times = [];
 
-  // Test vector 1: Empty string
   for (final testVector in testVectors) {
     final input = (testVector['input'] as String).codeUnits;
     final v = await runBenchmark(testVector['name'], (){boringssl_ffi.sha256.hash(input);}, iterations);
