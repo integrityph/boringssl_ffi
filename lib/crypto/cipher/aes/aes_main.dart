@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import 'dart:ffi' as ffi;
 import 'package:boringssl_ffi/src/bindings/bindings.dart' as bindings;
 import 'package:boringssl_ffi/src/ffi_lib/ffi_lib.dart';
-import 'package:boringssl_ffi/src/helpers/pkcs7.dart';
+import 'package:boringssl_ffi/src/helpers/padding/pkcs7.dart';
 import 'package:boringssl_ffi/src/logging/logging.dart';
 
 part 'aes_ecb.dart';

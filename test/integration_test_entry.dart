@@ -15,6 +15,12 @@ import 'crypto/hash/hmac_sha256/hmac_sha256_test.dart' as hmac_sha256_test;
 import 'crypto/hash/hmac_sha384/hmac_sha384_test.dart' as hmac_sha384_test;
 import 'crypto/hash/hmac_sha512/hmac_sha512_test.dart' as hmac_sha512_test;
 import 'crypto/hash/hmac_sha512_256/hmac_sha512_256_test.dart' as hmac_sha512_256_test;
+import 'crypto/hash/pbkdf2_hmac_sha1/pbkdf2_hmac_sha1_test.dart' as pbkdf2_hmac_sha1_test;
+import 'crypto/hash/pbkdf2_hmac_sha224/pbkdf2_hmac_sha224_test.dart' as pbkdf2_hmac_sha224_test;
+import 'crypto/hash/pbkdf2_hmac_sha256/pbkdf2_hmac_sha256_test.dart' as pbkdf2_hmac_sha256_test;
+import 'crypto/hash/pbkdf2_hmac_sha384/pbkdf2_hmac_sha384_test.dart' as pbkdf2_hmac_sha384_test;
+import 'crypto/hash/pbkdf2_hmac_sha512/pbkdf2_hmac_sha512_test.dart' as pbkdf2_hmac_sha512_test;
+import 'crypto/hash/pbkdf2_hmac_sha512_256/pbkdf2_hmac_sha512_256_test.dart' as pbkdf2_hmac_sha512_256_test;
 import 'crypto/cipher/aes_ctr/aes_ctr_test.dart' as aes_ctr;
 import 'crypto/cipher/aes_ecb/aes_ecb_test.dart' as aes_ecb;
 import 'crypto/cipher/aes_cbc/aes_cbc_test.dart' as aes_cbc;
@@ -50,6 +56,12 @@ void startTesting([iterations=1]) {
     hmac_sha384_test.testGroupList,
     hmac_sha512_test.testGroupList,
     hmac_sha512_256_test.testGroupList,
+    pbkdf2_hmac_sha1_test.testGroupList,
+    pbkdf2_hmac_sha224_test.testGroupList,
+    pbkdf2_hmac_sha256_test.testGroupList,
+    pbkdf2_hmac_sha384_test.testGroupList,
+    pbkdf2_hmac_sha512_test.testGroupList,
+    pbkdf2_hmac_sha512_256_test.testGroupList,
     aes_ctr.testGroupList,
     aes_ecb.testGroupList,
     aes_cbc.testGroupList,
@@ -70,6 +82,12 @@ void startTesting([iterations=1]) {
     hmac_sha384_test.benchmarkGroupList,
     hmac_sha512_test.benchmarkGroupList,
     hmac_sha512_256_test.benchmarkGroupList,
+    pbkdf2_hmac_sha1_test.benchmarkGroupList,
+    pbkdf2_hmac_sha224_test.benchmarkGroupList,
+    pbkdf2_hmac_sha256_test.benchmarkGroupList,
+    pbkdf2_hmac_sha384_test.benchmarkGroupList,
+    pbkdf2_hmac_sha512_test.benchmarkGroupList,
+    pbkdf2_hmac_sha512_256_test.benchmarkGroupList,
     aes_ctr.benchmarkGroupList,
     aes_ecb.benchmarkGroupList,
     aes_cbc.benchmarkGroupList,
@@ -96,4 +114,3 @@ void startTesting([iterations=1]) {
     }
   }
 }
-

@@ -19,7 +19,7 @@ GrillTestResult decryptTest([int? iterations]) {
             .map<Map<String, dynamic>>((item) => item as Map<String, dynamic>)
             .toList();
 
-    // Test vector 1: Empty string
+    
     for (final testVector in testVectors) {
       test(testVector['name'], () {
         bool testPassed = true;
@@ -63,7 +63,7 @@ GrillTestResult decryptBenchmark([int? iterations]) {
             .map<Map<String, dynamic>>((item) => item as Map<String, dynamic>)
             .toList();
 
-    // Test vector 1: Empty string
+    
     for (final testVector in testVectors) {
       final data = hex.decode(testVector['input']);
       final key = hex.decode(testVector['key']);
