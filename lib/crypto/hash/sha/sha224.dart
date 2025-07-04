@@ -37,7 +37,7 @@ class Sha224 {
         return returnUint8List(outputPtr, SHA224_DIGEST_LENGTH);
       } else {
         // This is a rare failure case for the SHA224 function.
-        log.log("SHA224 function call failed");
+        logger.log("SHA224 function call failed");
         return null;
       }
     });

@@ -17,7 +17,7 @@ import 'package:boringssl_ffi/src/logging/logging.dart';
 /// Throws [ArgumentError] if [blockSize] is invalid.
 Uint8List? padPKCS7(List<int> data, int blockSize) {
   if (blockSize <= 0 || blockSize > 255) {
-    log.log('blockSize must be between 1 and 255 for PKCS#7 padding.');
+    logger.log('blockSize must be between 1 and 255 for PKCS#7 padding.');
     return null;
   }
 
@@ -41,20 +41,20 @@ Uint8List? padPKCS7(List<int> data, int blockSize) {
 
 Uint8List? unpadPKCS7(List<int> paddedData, int blockSize) {
   if (blockSize <= 0 || blockSize > 255) {
-    log.log('blockSize must be between 1 and 255 for PKCS#7 unpadding.');
+    logger.log('blockSize must be between 1 and 255 for PKCS#7 unpadding.');
     return null;
   }
 
   if (paddedData.isEmpty) {
     // An empty padded data can't contain valid padding information.
     // PKCS#7 requires at least one byte of padding.
-    log.log('Padded data cannot be empty for PKCS#7 unpadding.');
+    logger.log('Padded data cannot be empty for PKCS#7 unpadding.');
     return null;
   }
 
   if (paddedData.length % blockSize != 0) {
     // Padded data length must be a multiple of blockSize.
-    log.log('Padded data length (${paddedData.length}) is not a multiple of blockSize ($blockSize). Invalid padding.');
+    logger.log('Padded data length (${paddedData.length}) is not a multiple of blockSize ($blockSize). Invalid padding.');
     return null;
   }
 
@@ -64,7 +64,7 @@ Uint8List? unpadPKCS7(List<int> paddedData, int blockSize) {
   // Validate the padding length.
   // It must be greater than 0 and less than or equal to blockSize.
   if (paddingLength <= 0 || paddingLength > blockSize) {
-    log.log('Invalid PKCS#7 padding length ($paddingLength) found. It must be > 0 and <= blockSize ($blockSize).');
+    logger.log('Invalid PKCS#7 padding length ($paddingLength) found. It must be > 0 and <= blockSize ($blockSize).');
     return null;
   }
 
@@ -75,7 +75,7 @@ Uint8List? unpadPKCS7(List<int> paddedData, int blockSize) {
   // Iterate from the start of the padding to the end of the data.
   for (int i = expectedPaddingStart; i < paddedData.length; i++) {
     if (paddedData[i] != paddingLength) {
-      log.log('PKCS#7 padding verification failed: byte at index $i was ${paddedData[i]}, expected $paddingLength.');
+      logger.log('PKCS#7 padding verification failed: byte at index $i was ${paddedData[i]}, expected $paddingLength.');
       return null; // Padding bytes are not uniform
     }
   }

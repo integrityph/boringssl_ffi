@@ -111,7 +111,7 @@ class PBKDF2_HMAC {
     return arenaWrapper((Arena arena) {
       // check if the envelope object is available
       if (hashAlgorithm.objectPtr == ffi.nullptr) {
-        log.log("PBKDF2_HMAC._deriveKey: underlying EVP_MD pointer for ${hashAlgorithm.name} is NULL.");
+        logger.log("PBKDF2_HMAC._deriveKey: underlying EVP_MD pointer for ${hashAlgorithm.name} is NULL.");
         return null;
       }
 
@@ -137,7 +137,7 @@ class PBKDF2_HMAC {
         saltPtr,
         salt.length,
         iterations,
-        hashAlgorithm.objectPtr!,
+        hashAlgorithm.objectPtr,
         keyLength,
         outPtr,
       );
@@ -146,7 +146,7 @@ class PBKDF2_HMAC {
       if (result == 1) {
         return returnUint8List(outPtr, keyLength);
       } else {
-        log.log("PBKDF2_HMAC._deriveKey: PKCS5_PBKDF2_HMAC function call failed and returned 0");
+        logger.log("PBKDF2_HMAC._deriveKey: PKCS5_PBKDF2_HMAC function call failed and returned 0");
         return null;
       }
     });

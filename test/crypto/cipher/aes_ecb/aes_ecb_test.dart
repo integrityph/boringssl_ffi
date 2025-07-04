@@ -18,7 +18,7 @@ void main() {
     }
   });
 
-  log.configure(showStackTraces: true);
+  logger.configure(showStackTraces: true);
 
   for (var groupItem in testGroupList) {
     groupItem();

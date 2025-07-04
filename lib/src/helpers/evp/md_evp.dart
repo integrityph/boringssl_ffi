@@ -29,9 +29,9 @@ enum HashAlgorithm {
 
   final int envNID;
   final int length;
-  static Map<int, ffi.Pointer<bindings.EVP_MD>?> _envCache = {};
+  static Map<int, ffi.Pointer<bindings.EVP_MD>> _envCache = {};
 
-  ffi.Pointer<bindings.EVP_MD>? get objectPtr {
+  ffi.Pointer<bindings.EVP_MD> get objectPtr {
     return _envCache.putIfAbsent(envNID, ()=>ffiBindings.EVP_get_digestbynid(envNID));
   }
 }

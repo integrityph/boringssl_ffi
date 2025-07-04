@@ -41,7 +41,7 @@ class AES {
 
   ffi.Pointer<bindings.AES_KEY>? _makeEncryptKey(Arena arena, List<int> key) {
     if (key.length != 16 && key.length != 24 && key.length != 32) {
-      log.log(
+      logger.log(
         "Invalid AES key size. Valid key sizes are 16, 24 or 32 but found ${key.length}",
       );
       return null;
@@ -60,7 +60,7 @@ class AES {
     );
 
     if (keySetResult != 0) {
-      log.log("AES_set_encrypt_key failed with code: $keySetResult");
+      logger.log("AES_set_encrypt_key failed with code: $keySetResult");
       return null;
     }
 
@@ -69,7 +69,7 @@ class AES {
 
   ffi.Pointer<bindings.AES_KEY>? _makeDecryptKey(Arena arena, List<int> key) {
     if (key.length != 16 && key.length != 24 && key.length != 32) {
-      log.log(
+      logger.log(
         "Invalid AES key size. Valid key sizes are 16, 24 or 32 but found ${key.length}",
       );
       return null;
@@ -88,7 +88,7 @@ class AES {
     );
 
     if (keySetResult != 0) {
-      log.log("AES_set_decrypt_key failed with code: $keySetResult");
+      logger.log("AES_set_decrypt_key failed with code: $keySetResult");
       return null;
     }
 

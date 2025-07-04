@@ -42,13 +42,13 @@ class ChaCha20 {
     return arenaWrapper((Arena arena) {
       // sanity check
       if (key.length != 32) {
-        log.log(
+        logger.log(
           "ChaCha20._encrypt: key size should be 32, but got ${key.length}",
         );
         return null;
       }
       if (nonce.length != 12) {
-        log.log(
+        logger.log(
           "ChaCha20._encrypt: nonce size should be 12, but got ${nonce.length}",
         );
         return null;
@@ -82,7 +82,7 @@ class ChaCha20 {
       );
 
       if (outputPtr == ffi.nullptr) {
-        log.log("ChaCha20._encrypt: null output");
+        logger.log("ChaCha20._encrypt: null output");
         return null;
       }
 

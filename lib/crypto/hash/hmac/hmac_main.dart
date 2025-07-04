@@ -52,7 +52,7 @@ class HMAC {
   Uint8List? _hmac(List<int> key, List<int> data, HashAlgorithm hashAlgorithm) {
     return arenaWrapper((Arena arena) {
       if (hashAlgorithm.objectPtr == ffi.nullptr) {
-        log.log("HMAC._hmac: underlying EVP_MD pointer for ${hashAlgorithm.name} is NULL.");
+        logger.log("HMAC._hmac: underlying EVP_MD pointer for ${hashAlgorithm.name} is NULL.");
         return null;
       }
 
@@ -72,14 +72,14 @@ class HMAC {
       keyPtr.asTypedList(key.length).setAll(0, key);
       dataPtr.asTypedList(data.length).setAll(0, data);
 
-      final resultPtr = ffiBindings.HMAC(hashAlgorithm.objectPtr!, keyPtr.cast<ffi.Void>(), key.length, dataPtr, data.length, digestPtr, digestLenPtr);
+      final resultPtr = ffiBindings.HMAC(hashAlgorithm.objectPtr, keyPtr.cast<ffi.Void>(), key.length, dataPtr, data.length, digestPtr, digestLenPtr);
 
       // Check if the call was successful. A NULL pointer indicates failure.
       if (resultPtr != ffi.nullptr && digestLenPtr != ffi.nullptr) {
         return returnUint8List(digestPtr, digestLenPtr.value);
       } else {
         // This is a rare failure case for the SHA512 function.
-        log.log("HMAC._hmac: function call failed for algorithm ${hashAlgorithm.name}.");
+        logger.log("HMAC._hmac: function call failed for algorithm ${hashAlgorithm.name}.");
         return null;
       }
     });

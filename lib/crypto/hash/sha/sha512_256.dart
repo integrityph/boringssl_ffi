@@ -37,7 +37,7 @@ class Sha512_256 {
         return returnUint8List(outputPtr, SHA512_256_DIGEST_LENGTH);
       } else {
         // This is a rare failure case for the SHA512_256 function.
-        log.log("SHA512_256 function call failed");
+        logger.log("SHA512_256 function call failed");
         return null;
       }
     });

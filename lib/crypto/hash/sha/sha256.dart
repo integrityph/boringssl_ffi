@@ -37,7 +37,7 @@ class Sha256 {
         return returnUint8List(outputPtr, SHA256_DIGEST_LENGTH);
       } else {
         // This is a rare failure case for the SHA256 function.
-        log.log("SHA256 function call failed");
+        logger.log("SHA256 function call failed");
         return null;
       }
     });

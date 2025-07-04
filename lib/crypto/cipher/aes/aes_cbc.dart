@@ -30,7 +30,7 @@ class AES_CBC {
         keyPtr = aes._makeDecryptKey(arena, key);
       }
       if (keyPtr == null) {
-        log.log("AES_ECB.encrypt: unable to encrypt, key creation failed");
+        logger.log("AES_ECB.encrypt: unable to encrypt, key creation failed");
         return null;
       }
 
@@ -63,7 +63,7 @@ class AES_CBC {
         );
 
         if (outputPtr == ffi.nullptr) {
-          log.log("AES_ECB.encrypt: null output");
+          logger.log("AES_ECB.encrypt: null output");
           return null;
         }
 

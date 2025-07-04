@@ -43,8 +43,8 @@ GrillTestResult decryptTest([int? iterations]) {
             );
           }
         } catch (e) {
-          log.configure(showStackTraces: true);
-          log.log(
+          logger.configure(showStackTraces: true);
+          logger.log(
             "error in unit test ${testVector['name']}: $e\n${Trace.current()}",
           );
           testPassed = false;

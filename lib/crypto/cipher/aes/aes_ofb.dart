@@ -47,7 +47,7 @@ class AES_OFB {
       final keyPtr = aes._makeEncryptKey(arena, key);
 
       if (keyPtr == null) {
-        log.log("AES_OFB.encrypt: unable to encrypt, key creation failed");
+        logger.log("AES_OFB.encrypt: unable to encrypt, key creation failed");
         return null;
       }
 
@@ -74,7 +74,7 @@ class AES_OFB {
 
       // validate results
       if (outputPtr == ffi.nullptr) {
-        log.log("AES_OFB.encrypt: null output");
+        logger.log("AES_OFB.encrypt: null output");
         return null;
       }
 

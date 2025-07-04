@@ -10,7 +10,7 @@ dynamic arenaWrapper(Function(Arena arena) fun) {
   try {
     return fun(arena);
   } catch (e) {
-    log.log("_arenaWrapper: function call failed. $e");
+    logger.log("_arenaWrapper: function call failed. $e");
     return null;
   } finally {
     arena.releaseAll();

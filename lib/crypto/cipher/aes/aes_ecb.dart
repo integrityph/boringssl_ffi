@@ -30,7 +30,7 @@ class AES_ECB {
         keyPtr = aes._makeDecryptKey(arena, key);
       }
       if (keyPtr == null) {
-        log.log("AES_ECB.encrypt: unable to encrypt, key creation failed");
+        logger.log("AES_ECB.encrypt: unable to encrypt, key creation failed");
         return null;
       }
 
@@ -52,7 +52,7 @@ class AES_ECB {
         ffiBindings.AES_ecb_encrypt(inputPtr, outputPtr, keyPtr, enc);
 
         if (outputPtr == ffi.nullptr) {
-          log.log("AES_ECB.encrypt: null output");
+          logger.log("AES_ECB.encrypt: null output");
           return null;
         }
 

@@ -31,7 +31,7 @@ class _FFIBindings {
         return ffi.DynamicLibrary.open('$_libName.dll');
       }
     } catch (e) {
-      log.log("_openDylib failed to open boringSSL binary. $e");
+      logger.log("_openDylib failed to open boringSSL binary. $e");
       rethrow;
     }
     throw UnsupportedError('Unknown platform: ${Platform.operatingSystem}');

@@ -43,7 +43,7 @@ class Sha1 {
         return returnUint8List(outputPtr, SHA1_DIGEST_LENGTH);
       } else {
         // This is a rare failure case for the SHA1 function.
-        log.log("SHA1 function call failed");
+        logger.log("SHA1 function call failed");
         return null;
       }
     });

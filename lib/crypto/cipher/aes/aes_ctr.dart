@@ -50,7 +50,7 @@ class AES_CTR {
       final keyPtr = aes._makeEncryptKey(arena, key);
 
       if (keyPtr == null) {
-        log.log("AES_CTR128.encrypt: unable to encrypt, key creation failed");
+        logger.log("AES_CTR128.encrypt: unable to encrypt, key creation failed");
         return null;
       }
 
@@ -79,7 +79,7 @@ class AES_CTR {
 
       // validate results
       if (outputPtr == ffi.nullptr) {
-        log.log("AES_CTR128.encrypt: null output");
+        logger.log("AES_CTR128.encrypt: null output");
         return null;
       }
 

@@ -48,7 +48,7 @@ class AES_CFB {
       final keyPtr = aes._makeEncryptKey(arena, key);
 
       if (keyPtr == null) {
-        log.log("AES_CFB._decrypt: unable to encrypt, key creation failed");
+        logger.log("AES_CFB._decrypt: unable to encrypt, key creation failed");
         return null;
       }
 
@@ -74,7 +74,7 @@ class AES_CFB {
 
       // validate results
       if (outputPtr == ffi.nullptr) {
-        log.log("AES_CFB._decrypt: null output");
+        logger.log("AES_CFB._decrypt: null output");
         return null;
       }
 

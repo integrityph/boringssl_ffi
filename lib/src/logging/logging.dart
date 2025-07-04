@@ -1,7 +1,7 @@
 import 'package:logging/logging.dart' as logging;
 import 'package:stack_trace/stack_trace.dart';
 
-final _Log log = _Log();
+final _Log logger = _Log();
 
 enum Level {
   debug,

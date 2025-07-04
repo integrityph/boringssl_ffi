@@ -37,7 +37,7 @@ class Sha384 {
         return returnUint8List(outputPtr, SHA384_DIGEST_LENGTH);
       } else {
         // This is a rare failure case for the SHA384 function.
-        log.log("SHA384 function call failed");
+        logger.log("SHA384 function call failed");
         return null;
       }
     });
