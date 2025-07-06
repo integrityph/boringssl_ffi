@@ -50,7 +50,7 @@ class HMAC {
   }
 
   Uint8List? _hmac(List<int> key, List<int> data, HashAlgorithm hashAlgorithm) {
-    return arenaWrapper((Arena arena) {
+    return arenaWrapper((SafeArena arena) {
       if (hashAlgorithm.objectPtr == ffi.nullptr) {
         logger.log("HMAC._hmac: underlying EVP_MD pointer for ${hashAlgorithm.name} is NULL.");
         return null;

@@ -1,5 +1,17 @@
 #!/bin/bash
 
+if [ $# -eq 0 ]; then
+	echo "No arguments provided. Running default test command..."
+	LD_LIBRARY_PATH="$PWD/src/build/lib:$LD_LIBRARY_PATH" flutter test --exclude-tags no-tdd
+	exit 0;
+fi
+
+if [ $1 -eq 'full' ]; then
+	echo "No arguments provided. Running default test command..."
+	LD_LIBRARY_PATH="$PWD/src/build/lib:$LD_LIBRARY_PATH" flutter test
+	exit 0;
+fi
+
 # --- 1. Device Selection ---
 
 echo "Searching for connected mobile devices..."

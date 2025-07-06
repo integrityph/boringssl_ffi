@@ -29,7 +29,7 @@ class AES_OFB {
     List<int> ivec,
     int num,
   ) {
-    return arenaWrapper((Arena arena) {
+    return arenaWrapper((SafeArena arena) {
       final ffi.Pointer<ffi.Uint8> inputPtr = arena.allocate<ffi.Uint8>(
         data.length,
       );

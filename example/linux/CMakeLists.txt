@@ -75,6 +75,9 @@ set_target_properties(${BINARY_NAME}
 include(flutter/generated_plugins.cmake)
 
 
+find_package(X11 REQUIRED)
+target_link_libraries(${BINARY_NAME} PRIVATE PkgConfig::GTK X11::X11)
+
 # === Installation ===
 # By default, "installing" just makes a relocatable bundle in the build
 # directory.

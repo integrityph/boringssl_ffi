@@ -4,16 +4,19 @@ import 'dart:io';
 import 'package:boringssl_ffi/src/logging/logging.dart';
 import 'package:boringssl_ffi/src/bindings/bindings.dart';
 
-final ffiBindings = _FFIBindings().bindings;
+final _ffiBindingsInstance = _FFIBindings();
+final ffiBindings = _ffiBindingsInstance.bindings;
+final ffiLookupFunc = _FFIBindings.dynamicLibrary.lookup;
 
 class _FFIBindings {
   static final _libName = 'boringssl_ffi';
+  static final ffi.DynamicLibrary dynamicLibrary = _openDylib();
   final BoringSSLBindings bindings;
 
   _FFIBindings() : bindings = _getBindings();
 
   static BoringSSLBindings _getBindings() {
-    return BoringSSLBindings(_openDylib());
+    return BoringSSLBindings(dynamicLibrary);
   }
 
   static ffi.DynamicLibrary _openDylib() {

@@ -39,7 +39,7 @@ class ChaCha20 {
     List<int> nonce,
     int counter,
   ) {
-    return arenaWrapper((Arena arena) {
+    return arenaWrapper((SafeArena arena) {
       // sanity check
       if (key.length != 32) {
         logger.log(

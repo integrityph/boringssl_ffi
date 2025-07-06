@@ -32,7 +32,7 @@ class AES_CTR {
     List<int> ecountBuf,
     int num,
   ) {
-    return arenaWrapper((Arena arena) {
+    return arenaWrapper((SafeArena arena) {
       final ffi.Pointer<ffi.Uint8> inputPtr = arena.allocate<ffi.Uint8>(
         data.length,
       );

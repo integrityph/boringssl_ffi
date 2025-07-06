@@ -109,7 +109,7 @@ class HKDF {
     int keyLength,
     HashAlgorithm hashAlgorithm,
   ) {
-    return arenaWrapper((Arena arena) {
+    return arenaWrapper((SafeArena arena) {
       // check if the envelope object is available
       if (hashAlgorithm.objectPtr == ffi.nullptr) {
         logger.log(

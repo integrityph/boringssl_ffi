@@ -11,7 +11,7 @@ class Sha512_256 {
   const Sha512_256();
 
   Uint8List? hash(List<int> data) {		
-    return arenaWrapper((Arena arena) {
+    return arenaWrapper((SafeArena arena) {
       final ffi.Pointer<ffi.Uint8> inputPtr = arena.allocate<ffi.Uint8>(
         data.length,
       );

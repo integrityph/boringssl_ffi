@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:ffi' as ffi;
 import 'package:boringssl_ffi/src/bindings/bindings.dart' as bindings;
 import 'package:boringssl_ffi/src/ffi_lib/ffi_lib.dart';
+import 'package:boringssl_ffi/src/helpers/conversion/list_to_bytearray.dart';
 import 'package:boringssl_ffi/src/helpers/padding/pkcs7.dart';
 import 'package:boringssl_ffi/src/logging/logging.dart';
 
@@ -39,7 +40,7 @@ class AES {
     return _aes_cfb;
   }
 
-  ffi.Pointer<bindings.AES_KEY>? _makeEncryptKey(Arena arena, List<int> key) {
+  ffi.Pointer<bindings.AES_KEY>? _makeEncryptKey(SafeArena arena, List<int> key) {
     if (key.length != 16 && key.length != 24 && key.length != 32) {
       logger.log(
         "Invalid AES key size. Valid key sizes are 16, 24 or 32 but found ${key.length}",
@@ -67,7 +68,7 @@ class AES {
     return aesKeyPtr;
   }
 
-  ffi.Pointer<bindings.AES_KEY>? _makeDecryptKey(Arena arena, List<int> key) {
+  ffi.Pointer<bindings.AES_KEY>? _makeDecryptKey(SafeArena arena, List<int> key) {
     if (key.length != 16 && key.length != 24 && key.length != 32) {
       logger.log(
         "Invalid AES key size. Valid key sizes are 16, 24 or 32 but found ${key.length}",

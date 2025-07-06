@@ -30,7 +30,7 @@ class AES_CFB {
     int num,
     int enc
   ) {
-    return arenaWrapper((Arena arena) {
+    return arenaWrapper((SafeArena arena) {
       final ffi.Pointer<ffi.Uint8> inputPtr = arena.allocate<ffi.Uint8>(
         data.length,
       );

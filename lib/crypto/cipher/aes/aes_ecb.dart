@@ -5,19 +5,48 @@ const _aes_ecb = AES_ECB();
 class AES_ECB {
   const AES_ECB();
 
-  Uint8List? encrypt(List<int> data, List<int> key) {
-    return _encrypt(data,key, AES.AES_ENCRYPT);
+  Uint8List? encrypt(
+    List<int> data,
+    List<int> key, {
+    bool enablePadding = false,
+  }) {
+    return _encrypt(
+      data.toUint8List(),
+      key.toUint8List(),
+      AES.AES_ENCRYPT,
+      enablePadding: enablePadding,
+    );
   }
 
-  Uint8List? decrypt(List<int> data, List<int> key) {
-    return _encrypt(data,key, AES.AES_DECRYPT);
+  Uint8List? decrypt(
+    List<int> data,
+    List<int> key, {
+    bool enablePadding = false,
+  }) {
+    return _encrypt(
+      data.toUint8List(),
+      key.toUint8List(),
+      AES.AES_DECRYPT,
+      enablePadding: enablePadding,
+    );
   }
 
-  Uint8List? _encrypt(List<int> data, List<int> key, int enc) {
-    return arenaWrapper((Arena arena) {
+  Uint8List? _encrypt(
+    Uint8List data,
+    Uint8List key,
+    int enc, {
+    bool enablePadding = false,
+  }) {
+    return arenaWrapper((SafeArena arena) {
       // Use PKCS#7 padding first
-      if (enc == AES.AES_ENCRYPT) {
+      if (enablePadding && enc == AES.AES_ENCRYPT) {
         data = padPKCS7(data, AES.BLOCK_SIZE)!;
+      }
+
+      if ((data.length % AES.BLOCK_SIZE) != 0) {
+        logger.log(
+          "AES_CBC._encrypt: Invalid input size. Either enable padding or ensure the data length is a multiple of 16",
+        );
       }
 
       List<int> output = [];
@@ -59,7 +88,7 @@ class AES_ECB {
         output.addAll(returnUint8List(outputPtr, AES.BLOCK_SIZE));
       }
 
-      if (enc == AES.AES_DECRYPT) {
+      if (enablePadding && enc == AES.AES_DECRYPT) {
         output = unpadPKCS7(output, AES.BLOCK_SIZE)!;
       }
 

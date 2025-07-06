@@ -1,7 +1,7 @@
 import 'package:logging/logging.dart' as logging;
 import 'package:boringssl_ffi/src/logging/logging.dart';
 import '../../../../grill_testing/grill_testing.dart';
-import 'derive_test.dart';
+import 'derive.dart';
 
 final List<GrillGroupFunc> testGroupList = [hashingTest];
 final List<GrillGroupFunc> benchmarkGroupList = [hashingBenchmark];

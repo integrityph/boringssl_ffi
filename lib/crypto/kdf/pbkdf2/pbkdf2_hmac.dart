@@ -108,7 +108,7 @@ class PBKDF2_HMAC {
     int keyLength,
     HashAlgorithm hashAlgorithm,
   ) {
-    return arenaWrapper((Arena arena) {
+    return arenaWrapper((SafeArena arena) {
       // check if the envelope object is available
       if (hashAlgorithm.objectPtr == ffi.nullptr) {
         logger.log("PBKDF2_HMAC._deriveKey: underlying EVP_MD pointer for ${hashAlgorithm.name} is NULL.");

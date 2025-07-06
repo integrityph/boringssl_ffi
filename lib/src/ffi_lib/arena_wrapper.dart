@@ -1,12 +1,11 @@
 import 'dart:ffi' as ffi;
 import 'dart:typed_data';
-import 'package:ffi/ffi.dart';
 import 'package:boringssl_ffi/src/logging/logging.dart';
-
+import 'safe_arena.dart';
 export 'package:ffi/ffi.dart';
 
-dynamic arenaWrapper(Function(Arena arena) fun) {
-  final arena = Arena();
+dynamic arenaWrapper(Function(SafeArena arena) fun) {
+  final arena = SafeArena();
   try {
     return fun(arena);
   } catch (e) {

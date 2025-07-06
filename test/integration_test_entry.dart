@@ -27,12 +27,13 @@ import 'crypto/kdf/hkdf_sha256/hkdf_sha256_test.dart' as hkdf_sha256_test;
 import 'crypto/kdf/hkdf_sha384/hkdf_sha384_test.dart' as hkdf_sha384_test;
 import 'crypto/kdf/hkdf_sha512/hkdf_sha512_test.dart' as hkdf_sha512_test;
 import 'crypto/kdf/hkdf_sha512_256/hkdf_sha512_256_test.dart' as hkdf_sha512_256_test;
-import 'crypto/cipher/aes_ctr/aes_ctr_test.dart' as aes_ctr;
-import 'crypto/cipher/aes_ecb/aes_ecb_test.dart' as aes_ecb;
-import 'crypto/cipher/aes_cbc/aes_cbc_test.dart' as aes_cbc;
-import 'crypto/cipher/aes_ofb/aes_ofb_test.dart' as aes_ofb;
-import 'crypto/cipher/aes_cfb/aes_cfb_test.dart' as aes_cfb;
+import 'crypto/cipher/aes_ctr/aes_ctr.dart' as aes_ctr;
+import 'crypto/cipher/aes_ecb/aes_ecb.dart' as aes_ecb;
+import 'crypto/cipher/aes_cbc/aes_cbc.dart' as aes_cbc;
+import 'crypto/cipher/aes_ofb/aes_ofb.dart' as aes_ofb;
+import 'crypto/cipher/aes_cfb/aes_cfb.dart' as aes_cfb;
 import 'crypto/cipher/chacha/chacha_test.dart' as chacha;
+import 'crypto/cipher/aead_aes_gcm/aead_aes_gcm.dart' as aead_aes_gcm;
 
 
 void startTesting([iterations=1]) {
@@ -80,6 +81,7 @@ void startTesting([iterations=1]) {
     aes_ofb.testGroupList,
     aes_cfb.testGroupList,
     chacha.testGroupList,
+    aead_aes_gcm.testGroupList,
   ];
   final List<List<GrillGroupFunc>> benchmarkList = [
     sha1_test.benchmarkGroupList,
