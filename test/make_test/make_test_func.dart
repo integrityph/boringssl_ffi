@@ -14,15 +14,22 @@ Function() makeTest(
   dynamic tags,
   String keyValueSeparator = ":",
   String unnamedTagKey = "",
+  bool isJSON = false,
 }) {
   return () {
     group(name, () {
-      List<Map<String, dynamic>> testVectors = keyValueToJSON(
+      List<Map<String, dynamic>> testVectors;
+      if (isJSON) {
+        testVectors = (jsonDecode(testVector) as List<dynamic>).map<Map<String, dynamic>>((sample)=>sample).toList();
+      } else {
+        testVectors = keyValueToJSON(
         testVector,
         "",
         separator: keyValueSeparator,
         unnamedTagKey: unnamedTagKey,
       );
+      }
+      
 
       if (testVectorFilter != null) {
         testVectors = testVectors.where(testVectorFilter).toList();

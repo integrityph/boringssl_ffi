@@ -1,6 +1,7 @@
 import 'dart:ffi' as ffi;
 import 'dart:typed_data';
 import 'package:boringssl_ffi/src/ffi_lib/ffi_lib.dart';
+import 'package:boringssl_ffi/src/helpers/conversion/list_to_bytearray.dart';
 import 'package:boringssl_ffi/src/logging/logging.dart';
 
 const sha512_256 = Sha512_256();
@@ -10,8 +11,9 @@ class Sha512_256 {
 
   const Sha512_256();
 
-  Uint8List? hash(List<int> data) {		
+  Uint8List? hash(List<int> data) {
     return arenaWrapper((SafeArena arena) {
+      data = data.toUint8List();
       final ffi.Pointer<ffi.Uint8> inputPtr = arena.allocate<ffi.Uint8>(
         data.length,
       );

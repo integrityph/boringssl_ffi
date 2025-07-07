@@ -1,4 +1,9 @@
-List<Map<String, dynamic>> keyValueToJSON(String src, String name, {String separator=":", String unnamedTagKey=""}) {
+List<Map<String, dynamic>> keyValueToJSON(
+  String src,
+  String name, {
+  String separator = ":",
+  String unnamedTagKey = "",
+}) {
   final List<String> lines = src
       .split("\n")
       .map((line) => line.trim())
@@ -9,6 +14,11 @@ List<Map<String, dynamic>> keyValueToJSON(String src, String name, {String separ
   List<String> parts;
   int counter = 1;
   String unnamedTagValue = "";
+  String namedTagKey = "";
+  String namedTagValue = "";
+  final unnamedTagRegex = RegExp(r'\[([^\]=]+)\]');
+  final namedTagRegex = RegExp(r'\[([^\]=]+?)\s*=\s*([^\]]+?)\]');
+  RegExpMatch? match;
   for (final line in lines) {
     if (line.startsWith("#")) {
       continue;
@@ -23,16 +33,29 @@ List<Map<String, dynamic>> keyValueToJSON(String src, String name, {String separ
     if (line.isEmpty) {
       continue;
     }
-    if (line.substring(0,1)=="[" && unnamedTagKey != "") {
-      unnamedTagValue = line.substring(1,line.length-1);
+    match = unnamedTagRegex.firstMatch(line);
+    if (unnamedTagKey != "" && match != null) {
+      unnamedTagValue = match.group(0)!;
+      unnamedTagValue = line.substring(1, line.length - 1);
+      continue;
     }
-    if (!line.contains(separator)) {
+    match = namedTagRegex.firstMatch(line);
+    if (match != null) {
+      namedTagKey = match.group(1)!;
+      namedTagValue = match.group(2)!;
+      continue;
+    } else if (!line.contains(separator)) {
       continue;
     }
     // at this point we have a sample
-    tempMap ??= {"_name": "sample #$counter"};
-    if (unnamedTagValue != "") {
-      tempMap[unnamedTagKey] = unnamedTagValue;
+    if (tempMap == null) {
+      tempMap = {"_name": "sample #$counter"};
+      if (unnamedTagValue != "") {
+        tempMap[unnamedTagKey] = unnamedTagValue;
+      }
+      if (namedTagKey != "") {
+        tempMap[namedTagKey] = namedTagValue;
+      }
     }
     parts = line.split(separator).map((part) => part.trim()).toList();
     tempMap[parts[0]] = parts[1].replaceAll("\"", "").trim();
