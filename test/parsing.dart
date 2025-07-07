@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'helpers.dart';
+
 List<Map<String, dynamic>> keyValueToJSON(
   String src,
   String name, {
@@ -57,8 +61,15 @@ List<Map<String, dynamic>> keyValueToJSON(
         tempMap[namedTagKey] = namedTagValue;
       }
     }
-    parts = line.split(separator).map((part) => part.trim()).toList();
-    tempMap[parts[0]] = parts[1].replaceAll("\"", "").trim();
+    parts = line.split(separator);
+    parts[0] = parts[0].trim();
+    parts[1] = parts.sublist(1).join(separator).trim();
+
+    // prepare the value
+    if (parts[1].startsWith("\"")) {
+      parts[1] = hex.encode(utf8.encode(parts[1].substring(1,parts[1].length-1)));
+    }
+    tempMap[parts[0]] = parts[1];
   }
 
   // check if we still have a sample that wasn't added yet

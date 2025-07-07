@@ -97,8 +97,12 @@ class AEAD {
     return _initSession(key.toUint8List(), aeadAlgorithm);
   }
 
-  AEADSession? _initSession(Uint8List key, AEADAlgorithm aeadAlgorithm) {
-    return AEADSession.initSession(key, aeadAlgorithm);
+  AEADSession? _initSession(
+    Uint8List key,
+    AEADAlgorithm aeadAlgorithm, {
+    int? tagLength,
+  }) {
+    return AEADSession.initSession(key, aeadAlgorithm, tagLength: tagLength);
   }
 
   Uint8List? sealAES_GCM(
@@ -224,9 +228,14 @@ class AEAD {
     Uint8List additionalData,
     Uint8List key,
     Uint8List nonce,
-    AEADAlgorithm aeadAlgorithm,
-  ) {
-    final session = AEADSession.initSession(key, aeadAlgorithm);
+    AEADAlgorithm aeadAlgorithm, {
+    int? tagLength,
+  }) {
+    final session = AEADSession.initSession(
+      key,
+      aeadAlgorithm,
+      tagLength: tagLength,
+    );
     if (session == null) {
       return null;
     }
@@ -248,18 +257,34 @@ class AEAD {
     List<int> data,
     List<int> additionalData,
     List<int> key,
-    List<int> nonce,
-  ) {
-    return _openNamed("ChaCha20Poly1305", data, additionalData, key, nonce);
+    List<int> nonce, {
+    int? tagLength,
+  }) {
+    return _openNamed(
+      "ChaCha20Poly1305",
+      data,
+      additionalData,
+      key,
+      nonce,
+      tagLength: tagLength,
+    );
   }
 
   Uint8List? openXChaCha20Poly1305(
     List<int> data,
     List<int> additionalData,
     List<int> key,
-    List<int> nonce,
-  ) {
-    return _openNamed("XChaCha20Poly1305", data, additionalData, key, nonce);
+    List<int> nonce, {
+    int? tagLength,
+  }) {
+    return _openNamed(
+      "XChaCha20Poly1305",
+      data,
+      additionalData,
+      key,
+      nonce,
+      tagLength: tagLength,
+    );
   }
 
   Uint8List? openAES_CTR_HMAC_SHA256(
@@ -330,8 +355,9 @@ class AEAD {
     List<int> data,
     List<int> additionalData,
     List<int> key,
-    List<int> nonce,
-  ) {
+    List<int> nonce, {
+    int? tagLength,
+  }) {
     final algoList = _algoMap[algoGroupName]!;
     final AEADAlgorithm? aeadAlgorithm = algoList.firstWhereOrNull(
       (algo) => algo.keyLength == key.length,
@@ -350,6 +376,7 @@ class AEAD {
       key.toUint8List(),
       nonce.toUint8List(),
       aeadAlgorithm,
+      tagLength: tagLength,
     );
   }
 
@@ -358,9 +385,14 @@ class AEAD {
     Uint8List additionalData,
     Uint8List key,
     Uint8List nonce,
-    AEADAlgorithm aeadAlgorithm,
-  ) {
-    final session = AEADSession.initSession(key, aeadAlgorithm);
+    AEADAlgorithm aeadAlgorithm, {
+    int? tagLength,
+  }) {
+    final session = AEADSession.initSession(
+      key,
+      aeadAlgorithm,
+      tagLength: tagLength,
+    );
     if (session == null) {
       return null;
     }

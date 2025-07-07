@@ -6,7 +6,7 @@ class AEADSession {
 
   AEADSession._(this._aeadAlgorithm);
 
-  static AEADSession? initSession(Uint8List key, AEADAlgorithm aeadAlgorithm) {
+  static AEADSession? initSession(Uint8List key, AEADAlgorithm aeadAlgorithm, {int? tagLength}) {
     if (key.length != aeadAlgorithm.keyLength) {
       logger.log(
         'AEADSession.initSession: Invalid key length for ${aeadAlgorithm.name}. Expected ${aeadAlgorithm.keyLength}, but got ${key.length}',
@@ -20,7 +20,7 @@ class AEADSession {
         aeadAlgorithm.objectPtr,
         keyPtr,
         aeadAlgorithm.keyLength,
-        0,
+        tagLength??0,
       );
     });
 
