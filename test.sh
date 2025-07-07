@@ -6,9 +6,16 @@ if [ $# -eq 0 ]; then
 	exit 0;
 fi
 
+if [ $1 -eq 'coverage' ]; then
+	echo "No arguments provided. Running default test command..."
+	LD_LIBRARY_PATH="$PWD/src/build/lib:$LD_LIBRARY_PATH" flutter test --coverage
+	genhtml coverage/lcov.info --output-directory=coverage/html
+	exit 0;
+fi
+
 if [ $1 -eq 'full' ]; then
 	echo "No arguments provided. Running default test command..."
-	LD_LIBRARY_PATH="$PWD/src/build/lib:$LD_LIBRARY_PATH" flutter test
+	LD_LIBRARY_PATH="$PWD/src/build/lib:$LD_LIBRARY_PATH" flutter test --coverage
 	exit 0;
 fi
 
