@@ -13182,111 +13182,6 @@ class BoringSSLBindings {
         )
       >();
 
-  int MLDSA65_prehash_init(
-    ffi.Pointer<MLDSA65_prehash> out_state,
-    ffi.Pointer<MLDSA65_public_key> public_key,
-    ffi.Pointer<ffi.Uint8> context,
-    int context_len,
-  ) {
-    return _MLDSA65_prehash_init(out_state, public_key, context, context_len);
-  }
-
-  late final _MLDSA65_prehash_initPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Int Function(
-            ffi.Pointer<MLDSA65_prehash>,
-            ffi.Pointer<MLDSA65_public_key>,
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Size,
-          )
-        >
-      >('MLDSA65_prehash_init');
-  late final _MLDSA65_prehash_init =
-      _MLDSA65_prehash_initPtr.asFunction<
-        int Function(
-          ffi.Pointer<MLDSA65_prehash>,
-          ffi.Pointer<MLDSA65_public_key>,
-          ffi.Pointer<ffi.Uint8>,
-          int,
-        )
-      >();
-
-  void MLDSA65_prehash_update(
-    ffi.Pointer<MLDSA65_prehash> inout_state,
-    ffi.Pointer<ffi.Uint8> msg,
-    int msg_len,
-  ) {
-    return _MLDSA65_prehash_update(inout_state, msg, msg_len);
-  }
-
-  late final _MLDSA65_prehash_updatePtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<MLDSA65_prehash>,
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Size,
-          )
-        >
-      >('MLDSA65_prehash_update');
-  late final _MLDSA65_prehash_update =
-      _MLDSA65_prehash_updatePtr.asFunction<
-        void Function(ffi.Pointer<MLDSA65_prehash>, ffi.Pointer<ffi.Uint8>, int)
-      >();
-
-  void MLDSA65_prehash_finalize(
-    ffi.Pointer<ffi.Uint8> out_msg_rep,
-    ffi.Pointer<MLDSA65_prehash> inout_state,
-  ) {
-    return _MLDSA65_prehash_finalize(out_msg_rep, inout_state);
-  }
-
-  late final _MLDSA65_prehash_finalizePtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<MLDSA65_prehash>,
-          )
-        >
-      >('MLDSA65_prehash_finalize');
-  late final _MLDSA65_prehash_finalize =
-      _MLDSA65_prehash_finalizePtr.asFunction<
-        void Function(ffi.Pointer<ffi.Uint8>, ffi.Pointer<MLDSA65_prehash>)
-      >();
-
-  int MLDSA65_sign_message_representative(
-    ffi.Pointer<ffi.Uint8> out_encoded_signature,
-    ffi.Pointer<MLDSA65_private_key> private_key,
-    ffi.Pointer<ffi.Uint8> msg_rep,
-  ) {
-    return _MLDSA65_sign_message_representative(
-      out_encoded_signature,
-      private_key,
-      msg_rep,
-    );
-  }
-
-  late final _MLDSA65_sign_message_representativePtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Int Function(
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<MLDSA65_private_key>,
-            ffi.Pointer<ffi.Uint8>,
-          )
-        >
-      >('MLDSA65_sign_message_representative');
-  late final _MLDSA65_sign_message_representative =
-      _MLDSA65_sign_message_representativePtr.asFunction<
-        int Function(
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<MLDSA65_private_key>,
-          ffi.Pointer<ffi.Uint8>,
-        )
-      >();
-
   int MLDSA65_marshal_public_key(
     ffi.Pointer<CBB> out,
     ffi.Pointer<MLDSA65_public_key> public_key,
@@ -13492,111 +13387,6 @@ class BoringSSLBindings {
           int,
           ffi.Pointer<ffi.Uint8>,
           int,
-        )
-      >();
-
-  int MLDSA87_prehash_init(
-    ffi.Pointer<MLDSA87_prehash> out_state,
-    ffi.Pointer<MLDSA87_public_key> public_key,
-    ffi.Pointer<ffi.Uint8> context,
-    int context_len,
-  ) {
-    return _MLDSA87_prehash_init(out_state, public_key, context, context_len);
-  }
-
-  late final _MLDSA87_prehash_initPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Int Function(
-            ffi.Pointer<MLDSA87_prehash>,
-            ffi.Pointer<MLDSA87_public_key>,
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Size,
-          )
-        >
-      >('MLDSA87_prehash_init');
-  late final _MLDSA87_prehash_init =
-      _MLDSA87_prehash_initPtr.asFunction<
-        int Function(
-          ffi.Pointer<MLDSA87_prehash>,
-          ffi.Pointer<MLDSA87_public_key>,
-          ffi.Pointer<ffi.Uint8>,
-          int,
-        )
-      >();
-
-  void MLDSA87_prehash_update(
-    ffi.Pointer<MLDSA87_prehash> inout_state,
-    ffi.Pointer<ffi.Uint8> msg,
-    int msg_len,
-  ) {
-    return _MLDSA87_prehash_update(inout_state, msg, msg_len);
-  }
-
-  late final _MLDSA87_prehash_updatePtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<MLDSA87_prehash>,
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Size,
-          )
-        >
-      >('MLDSA87_prehash_update');
-  late final _MLDSA87_prehash_update =
-      _MLDSA87_prehash_updatePtr.asFunction<
-        void Function(ffi.Pointer<MLDSA87_prehash>, ffi.Pointer<ffi.Uint8>, int)
-      >();
-
-  void MLDSA87_prehash_finalize(
-    ffi.Pointer<ffi.Uint8> out_msg_rep,
-    ffi.Pointer<MLDSA87_prehash> inout_state,
-  ) {
-    return _MLDSA87_prehash_finalize(out_msg_rep, inout_state);
-  }
-
-  late final _MLDSA87_prehash_finalizePtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<MLDSA87_prehash>,
-          )
-        >
-      >('MLDSA87_prehash_finalize');
-  late final _MLDSA87_prehash_finalize =
-      _MLDSA87_prehash_finalizePtr.asFunction<
-        void Function(ffi.Pointer<ffi.Uint8>, ffi.Pointer<MLDSA87_prehash>)
-      >();
-
-  int MLDSA87_sign_message_representative(
-    ffi.Pointer<ffi.Uint8> out_encoded_signature,
-    ffi.Pointer<MLDSA87_private_key> private_key,
-    ffi.Pointer<ffi.Uint8> msg_rep,
-  ) {
-    return _MLDSA87_sign_message_representative(
-      out_encoded_signature,
-      private_key,
-      msg_rep,
-    );
-  }
-
-  late final _MLDSA87_sign_message_representativePtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Int Function(
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<MLDSA87_private_key>,
-            ffi.Pointer<ffi.Uint8>,
-          )
-        >
-      >('MLDSA87_sign_message_representative');
-  late final _MLDSA87_sign_message_representative =
-      _MLDSA87_sign_message_representativePtr.asFunction<
-        int Function(
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<MLDSA87_private_key>,
-          ffi.Pointer<ffi.Uint8>,
         )
       >();
 
@@ -21276,32 +21066,6 @@ class BoringSSLBindings {
         )
       >();
 
-  int EVP_PKEY_get_ec_curve_nid(ffi.Pointer<EVP_PKEY> pkey) {
-    return _EVP_PKEY_get_ec_curve_nid(pkey);
-  }
-
-  late final _EVP_PKEY_get_ec_curve_nidPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<EVP_PKEY>)>>(
-        'EVP_PKEY_get_ec_curve_nid',
-      );
-  late final _EVP_PKEY_get_ec_curve_nid =
-      _EVP_PKEY_get_ec_curve_nidPtr.asFunction<
-        int Function(ffi.Pointer<EVP_PKEY>)
-      >();
-
-  int EVP_PKEY_get_ec_point_conv_form(ffi.Pointer<EVP_PKEY> pkey) {
-    return _EVP_PKEY_get_ec_point_conv_form(pkey);
-  }
-
-  late final _EVP_PKEY_get_ec_point_conv_formPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<EVP_PKEY>)>>(
-        'EVP_PKEY_get_ec_point_conv_form',
-      );
-  late final _EVP_PKEY_get_ec_point_conv_form =
-      _EVP_PKEY_get_ec_point_conv_formPtr.asFunction<
-        int Function(ffi.Pointer<EVP_PKEY>)
-      >();
-
   int EVP_PKEY_CTX_set_ec_paramgen_curve_nid(
     ffi.Pointer<EVP_PKEY_CTX> ctx,
     int nid,
@@ -23176,348 +22940,6 @@ class BoringSSLBindings {
       _EVP_PKEY_CTX_add1_hkdf_infoPtr.asFunction<
         int Function(ffi.Pointer<EVP_PKEY_CTX>, ffi.Pointer<ffi.Uint8>, int)
       >();
-
-  void KYBER_generate_key(
-    ffi.Pointer<ffi.Uint8> out_encoded_public_key,
-    ffi.Pointer<KYBER_private_key> out_private_key,
-  ) {
-    return _KYBER_generate_key(out_encoded_public_key, out_private_key);
-  }
-
-  late final _KYBER_generate_keyPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<KYBER_private_key>,
-          )
-        >
-      >('KYBER_generate_key');
-  late final _KYBER_generate_key =
-      _KYBER_generate_keyPtr.asFunction<
-        void Function(ffi.Pointer<ffi.Uint8>, ffi.Pointer<KYBER_private_key>)
-      >();
-
-  void KYBER_public_from_private(
-    ffi.Pointer<KYBER_public_key> out_public_key,
-    ffi.Pointer<KYBER_private_key> private_key,
-  ) {
-    return _KYBER_public_from_private(out_public_key, private_key);
-  }
-
-  late final _KYBER_public_from_privatePtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<KYBER_public_key>,
-            ffi.Pointer<KYBER_private_key>,
-          )
-        >
-      >('KYBER_public_from_private');
-  late final _KYBER_public_from_private =
-      _KYBER_public_from_privatePtr.asFunction<
-        void Function(
-          ffi.Pointer<KYBER_public_key>,
-          ffi.Pointer<KYBER_private_key>,
-        )
-      >();
-
-  void KYBER_encap(
-    ffi.Pointer<ffi.Uint8> out_ciphertext,
-    ffi.Pointer<ffi.Uint8> out_shared_secret,
-    ffi.Pointer<KYBER_public_key> public_key,
-  ) {
-    return _KYBER_encap(out_ciphertext, out_shared_secret, public_key);
-  }
-
-  late final _KYBER_encapPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<KYBER_public_key>,
-          )
-        >
-      >('KYBER_encap');
-  late final _KYBER_encap =
-      _KYBER_encapPtr.asFunction<
-        void Function(
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<KYBER_public_key>,
-        )
-      >();
-
-  void KYBER_decap(
-    ffi.Pointer<ffi.Uint8> out_shared_secret,
-    ffi.Pointer<ffi.Uint8> ciphertext,
-    ffi.Pointer<KYBER_private_key> private_key,
-  ) {
-    return _KYBER_decap(out_shared_secret, ciphertext, private_key);
-  }
-
-  late final _KYBER_decapPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<KYBER_private_key>,
-          )
-        >
-      >('KYBER_decap');
-  late final _KYBER_decap =
-      _KYBER_decapPtr.asFunction<
-        void Function(
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<KYBER_private_key>,
-        )
-      >();
-
-  int KYBER_marshal_public_key(
-    ffi.Pointer<CBB> out,
-    ffi.Pointer<KYBER_public_key> public_key,
-  ) {
-    return _KYBER_marshal_public_key(out, public_key);
-  }
-
-  late final _KYBER_marshal_public_keyPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<CBB>, ffi.Pointer<KYBER_public_key>)
-        >
-      >('KYBER_marshal_public_key');
-  late final _KYBER_marshal_public_key =
-      _KYBER_marshal_public_keyPtr.asFunction<
-        int Function(ffi.Pointer<CBB>, ffi.Pointer<KYBER_public_key>)
-      >();
-
-  int KYBER_parse_public_key(
-    ffi.Pointer<KYBER_public_key> out_public_key,
-    ffi.Pointer<CBS> in1,
-  ) {
-    return _KYBER_parse_public_key(out_public_key, in1);
-  }
-
-  late final _KYBER_parse_public_keyPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<KYBER_public_key>, ffi.Pointer<CBS>)
-        >
-      >('KYBER_parse_public_key');
-  late final _KYBER_parse_public_key =
-      _KYBER_parse_public_keyPtr.asFunction<
-        int Function(ffi.Pointer<KYBER_public_key>, ffi.Pointer<CBS>)
-      >();
-
-  int KYBER_marshal_private_key(
-    ffi.Pointer<CBB> out,
-    ffi.Pointer<KYBER_private_key> private_key,
-  ) {
-    return _KYBER_marshal_private_key(out, private_key);
-  }
-
-  late final _KYBER_marshal_private_keyPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<CBB>, ffi.Pointer<KYBER_private_key>)
-        >
-      >('KYBER_marshal_private_key');
-  late final _KYBER_marshal_private_key =
-      _KYBER_marshal_private_keyPtr.asFunction<
-        int Function(ffi.Pointer<CBB>, ffi.Pointer<KYBER_private_key>)
-      >();
-
-  int KYBER_parse_private_key(
-    ffi.Pointer<KYBER_private_key> out_private_key,
-    ffi.Pointer<CBS> in1,
-  ) {
-    return _KYBER_parse_private_key(out_private_key, in1);
-  }
-
-  late final _KYBER_parse_private_keyPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<KYBER_private_key>, ffi.Pointer<CBS>)
-        >
-      >('KYBER_parse_private_key');
-  late final _KYBER_parse_private_key =
-      _KYBER_parse_private_keyPtr.asFunction<
-        int Function(ffi.Pointer<KYBER_private_key>, ffi.Pointer<CBS>)
-      >();
-
-  void KYBER_generate_key_external_entropy(
-    ffi.Pointer<ffi.Uint8> out_encoded_public_key,
-    ffi.Pointer<KYBER_private_key> out_private_key,
-    ffi.Pointer<ffi.Uint8> entropy,
-  ) {
-    return _KYBER_generate_key_external_entropy(
-      out_encoded_public_key,
-      out_private_key,
-      entropy,
-    );
-  }
-
-  late final _KYBER_generate_key_external_entropyPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<KYBER_private_key>,
-            ffi.Pointer<ffi.Uint8>,
-          )
-        >
-      >('KYBER_generate_key_external_entropy');
-  late final _KYBER_generate_key_external_entropy =
-      _KYBER_generate_key_external_entropyPtr.asFunction<
-        void Function(
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<KYBER_private_key>,
-          ffi.Pointer<ffi.Uint8>,
-        )
-      >();
-
-  void KYBER_encap_external_entropy(
-    ffi.Pointer<ffi.Uint8> out_ciphertext,
-    ffi.Pointer<ffi.Uint8> out_shared_secret,
-    ffi.Pointer<KYBER_public_key> public_key,
-    ffi.Pointer<ffi.Uint8> entropy,
-  ) {
-    return _KYBER_encap_external_entropy(
-      out_ciphertext,
-      out_shared_secret,
-      public_key,
-      entropy,
-    );
-  }
-
-  late final _KYBER_encap_external_entropyPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Pointer<KYBER_public_key>,
-            ffi.Pointer<ffi.Uint8>,
-          )
-        >
-      >('KYBER_encap_external_entropy');
-  late final _KYBER_encap_external_entropy =
-      _KYBER_encap_external_entropyPtr.asFunction<
-        void Function(
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<KYBER_public_key>,
-          ffi.Pointer<ffi.Uint8>,
-        )
-      >();
-
-  void BORINGSSL_keccak(
-    ffi.Pointer<ffi.Uint8> out,
-    int out_len,
-    ffi.Pointer<ffi.Uint8> in1,
-    int in_len,
-    boringssl_keccak_config_t config,
-  ) {
-    return _BORINGSSL_keccak(out, out_len, in1, in_len, config.value);
-  }
-
-  late final _BORINGSSL_keccakPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Size,
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Size,
-            ffi.Int32,
-          )
-        >
-      >('BORINGSSL_keccak');
-  late final _BORINGSSL_keccak =
-      _BORINGSSL_keccakPtr.asFunction<
-        void Function(
-          ffi.Pointer<ffi.Uint8>,
-          int,
-          ffi.Pointer<ffi.Uint8>,
-          int,
-          int,
-        )
-      >();
-
-  void BORINGSSL_keccak_init(
-    ffi.Pointer<BORINGSSL_keccak_st> ctx,
-    boringssl_keccak_config_t config,
-  ) {
-    return _BORINGSSL_keccak_init(ctx, config.value);
-  }
-
-  late final _BORINGSSL_keccak_initPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<BORINGSSL_keccak_st>, ffi.Int32)
-        >
-      >('BORINGSSL_keccak_init');
-  late final _BORINGSSL_keccak_init =
-      _BORINGSSL_keccak_initPtr.asFunction<
-        void Function(ffi.Pointer<BORINGSSL_keccak_st>, int)
-      >();
-
-  void BORINGSSL_keccak_absorb(
-    ffi.Pointer<BORINGSSL_keccak_st> ctx,
-    ffi.Pointer<ffi.Uint8> in1,
-    int in_len,
-  ) {
-    return _BORINGSSL_keccak_absorb(ctx, in1, in_len);
-  }
-
-  late final _BORINGSSL_keccak_absorbPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<BORINGSSL_keccak_st>,
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Size,
-          )
-        >
-      >('BORINGSSL_keccak_absorb');
-  late final _BORINGSSL_keccak_absorb =
-      _BORINGSSL_keccak_absorbPtr.asFunction<
-        void Function(
-          ffi.Pointer<BORINGSSL_keccak_st>,
-          ffi.Pointer<ffi.Uint8>,
-          int,
-        )
-      >();
-
-  void BORINGSSL_keccak_squeeze(
-    ffi.Pointer<BORINGSSL_keccak_st> ctx,
-    ffi.Pointer<ffi.Uint8> out,
-    int out_len,
-  ) {
-    return _BORINGSSL_keccak_squeeze(ctx, out, out_len);
-  }
-
-  late final _BORINGSSL_keccak_squeezePtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<BORINGSSL_keccak_st>,
-            ffi.Pointer<ffi.Uint8>,
-            ffi.Size,
-          )
-        >
-      >('BORINGSSL_keccak_squeeze');
-  late final _BORINGSSL_keccak_squeeze =
-      _BORINGSSL_keccak_squeezePtr.asFunction<
-        void Function(
-          ffi.Pointer<BORINGSSL_keccak_st>,
-          ffi.Pointer<ffi.Uint8>,
-          int,
-        )
-      >();
 }
 
 typedef EVP_ENCODE_CTX = evp_encode_ctx_st;
@@ -23552,14 +22974,114 @@ final class stack_st_BIO extends ffi.Opaque {}
 
 typedef BIO = bio_st;
 
-final class bio_st extends ffi.Opaque {}
+final class bio_st extends ffi.Struct {
+  external ffi.Pointer<BIO_METHOD> method;
+
+  external CRYPTO_EX_DATA ex_data;
+
+  @ffi.Int()
+  external int init;
+
+  @ffi.Int()
+  external int shutdown;
+
+  @ffi.Int()
+  external int flags;
+
+  @ffi.Int()
+  external int retry_reason;
+
+  @ffi.Int()
+  external int num;
+
+  @CRYPTO_refcount_t()
+  external int references;
+
+  external ffi.Pointer<ffi.Void> ptr;
+
+  external ffi.Pointer<BIO> next_bio;
+
+  @ffi.Uint64()
+  external int num_read;
+
+  @ffi.Uint64()
+  external int num_write;
+}
 
 typedef BIO_METHOD = bio_method_st;
 
-final class bio_method_st extends ffi.Opaque {}
+final class bio_method_st extends ffi.Struct {
+  @ffi.Int()
+  external int type;
+
+  external ffi.Pointer<ffi.Char> name;
+
+  external ffi.Pointer<
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<BIO>, ffi.Pointer<ffi.Char>, ffi.Int)
+    >
+  >
+  bwrite;
+
+  external ffi.Pointer<
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<BIO>, ffi.Pointer<ffi.Char>, ffi.Int)
+    >
+  >
+  bread;
+
+  external ffi.Pointer<
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<BIO>, ffi.Pointer<ffi.Char>)
+    >
+  >
+  bputs;
+
+  external ffi.Pointer<
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<BIO>, ffi.Pointer<ffi.Char>, ffi.Int)
+    >
+  >
+  bgets;
+
+  external ffi.Pointer<
+    ffi.NativeFunction<
+      ffi.Long Function(
+        ffi.Pointer<BIO>,
+        ffi.Int,
+        ffi.Long,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >
+  ctrl;
+
+  external ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<BIO>)>>
+  create;
+
+  external ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<BIO>)>>
+  destroy;
+
+  external ffi.Pointer<
+    ffi.NativeFunction<
+      ffi.Long Function(ffi.Pointer<BIO>, ffi.Int, ffi.Pointer<BIO_info_cb>)
+    >
+  >
+  callback_ctrl;
+}
 
 typedef BIO_info_cb =
     ffi.NativeFunction<ffi.Int Function(ffi.Pointer<BIO>, ffi.Int, ffi.Int)>;
+typedef CRYPTO_EX_DATA = crypto_ex_data_st;
+
+final class crypto_ex_data_st extends ffi.Struct {
+  external ffi.Pointer<stack_st_void> sk;
+}
+
+final class stack_st_void extends ffi.Opaque {}
+
+typedef CRYPTO_refcount_t = ffi.Uint32;
+typedef DartCRYPTO_refcount_t = int;
 typedef ossl_ssize_t = ptrdiff_t;
 typedef ptrdiff_t = ffi.Long;
 typedef Dartptrdiff_t = int;
@@ -23662,10 +23184,6 @@ typedef CRYPTO_EX_dup =
         ffi.Pointer<ffi.Void> argp,
       )
     >;
-typedef CRYPTO_EX_DATA = crypto_ex_data_st;
-
-final class crypto_ex_data_st extends ffi.Opaque {}
-
 typedef CRYPTO_EX_free =
     ffi.NativeFunction<
       ffi.Void Function(
@@ -23927,8 +23445,6 @@ typedef OPENSSL_sk_copy_func =
     ffi.Pointer<ffi.NativeFunction<OPENSSL_sk_copy_funcFunction>>;
 typedef OPENSSL_sk_copy_funcFunction =
     ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void> ptr);
-
-final class stack_st_void extends ffi.Opaque {}
 
 final class stack_st_OPENSSL_STRING extends ffi.Opaque {}
 
@@ -24219,21 +23735,13 @@ final class hmac_ctx_st extends ffi.Struct {
 typedef EVP_MD_CTX = env_md_ctx_st;
 
 final class env_md_ctx_st extends ffi.Struct {
-  external UnnamedUnion2 unnamed;
-
   external ffi.Pointer<EVP_MD> digest;
+
+  external ffi.Pointer<ffi.Void> md_data;
 
   external ffi.Pointer<EVP_PKEY_CTX> pctx;
 
   external ffi.Pointer<evp_md_pctx_ops> pctx_ops;
-}
-
-final class UnnamedUnion2 extends ffi.Union {
-  @ffi.Array.multi([208])
-  external ffi.Array<ffi.Uint8> md_data;
-
-  @ffi.Uint64()
-  external int alignment;
 }
 
 typedef EVP_PKEY_CTX = evp_pkey_ctx_st;
@@ -24262,10 +23770,10 @@ final class md5_state_st extends ffi.Struct {
 }
 
 final class MLDSA65_private_key extends ffi.Struct {
-  external UnnamedUnion3 opaque;
+  external UnnamedUnion2 opaque;
 }
 
-final class UnnamedUnion3 extends ffi.Union {
+final class UnnamedUnion2 extends ffi.Union {
   @ffi.Array.multi([17536])
   external ffi.Array<ffi.Uint8> bytes;
 
@@ -24274,10 +23782,10 @@ final class UnnamedUnion3 extends ffi.Union {
 }
 
 final class MLDSA65_public_key extends ffi.Struct {
-  external UnnamedUnion4 opaque;
+  external UnnamedUnion3 opaque;
 }
 
-final class UnnamedUnion4 extends ffi.Union {
+final class UnnamedUnion3 extends ffi.Union {
   @ffi.Array.multi([6240])
   external ffi.Array<ffi.Uint8> bytes;
 
@@ -24285,23 +23793,11 @@ final class UnnamedUnion4 extends ffi.Union {
   external int alignment;
 }
 
-final class MLDSA65_prehash extends ffi.Struct {
-  external UnnamedUnion5 opaque;
-}
-
-final class UnnamedUnion5 extends ffi.Union {
-  @ffi.Array.multi([240])
-  external ffi.Array<ffi.Uint8> bytes;
-
-  @ffi.Uint64()
-  external int alignment;
-}
-
 final class MLDSA87_private_key extends ffi.Struct {
-  external UnnamedUnion6 opaque;
+  external UnnamedUnion4 opaque;
 }
 
-final class UnnamedUnion6 extends ffi.Union {
+final class UnnamedUnion4 extends ffi.Union {
   @ffi.Array.multi([23680])
   external ffi.Array<ffi.Uint8> bytes;
 
@@ -24310,10 +23806,10 @@ final class UnnamedUnion6 extends ffi.Union {
 }
 
 final class MLDSA87_public_key extends ffi.Struct {
-  external UnnamedUnion7 opaque;
+  external UnnamedUnion5 opaque;
 }
 
-final class UnnamedUnion7 extends ffi.Union {
+final class UnnamedUnion5 extends ffi.Union {
   @ffi.Array.multi([8288])
   external ffi.Array<ffi.Uint8> bytes;
 
@@ -24321,23 +23817,11 @@ final class UnnamedUnion7 extends ffi.Union {
   external int alignment;
 }
 
-final class MLDSA87_prehash extends ffi.Struct {
-  external UnnamedUnion8 opaque;
-}
-
-final class UnnamedUnion8 extends ffi.Union {
-  @ffi.Array.multi([240])
-  external ffi.Array<ffi.Uint8> bytes;
-
-  @ffi.Uint64()
-  external int alignment;
-}
-
 final class MLKEM768_public_key extends ffi.Struct {
-  external UnnamedUnion9 opaque;
+  external UnnamedUnion6 opaque;
 }
 
-final class UnnamedUnion9 extends ffi.Union {
+final class UnnamedUnion6 extends ffi.Union {
   @ffi.Array.multi([6208])
   external ffi.Array<ffi.Uint8> bytes;
 
@@ -24346,10 +23830,10 @@ final class UnnamedUnion9 extends ffi.Union {
 }
 
 final class MLKEM768_private_key extends ffi.Struct {
-  external UnnamedUnion10 opaque;
+  external UnnamedUnion7 opaque;
 }
 
-final class UnnamedUnion10 extends ffi.Union {
+final class UnnamedUnion7 extends ffi.Union {
   @ffi.Array.multi([7776])
   external ffi.Array<ffi.Uint8> bytes;
 
@@ -24358,10 +23842,10 @@ final class UnnamedUnion10 extends ffi.Union {
 }
 
 final class MLKEM1024_public_key extends ffi.Struct {
-  external UnnamedUnion11 opaque;
+  external UnnamedUnion8 opaque;
 }
 
-final class UnnamedUnion11 extends ffi.Union {
+final class UnnamedUnion8 extends ffi.Union {
   @ffi.Array.multi([10304])
   external ffi.Array<ffi.Uint8> bytes;
 
@@ -24370,10 +23854,10 @@ final class UnnamedUnion11 extends ffi.Union {
 }
 
 final class MLKEM1024_private_key extends ffi.Struct {
-  external UnnamedUnion12 opaque;
+  external UnnamedUnion9 opaque;
 }
 
-final class UnnamedUnion12 extends ffi.Union {
+final class UnnamedUnion9 extends ffi.Union {
   @ffi.Array.multi([12384])
   external ffi.Array<ffi.Uint8> bytes;
 
@@ -24400,7 +23884,7 @@ final class rsa_pss_params_st extends ffi.Opaque {}
 typedef SHA_CTX = sha_state_st;
 
 final class sha_state_st extends ffi.Struct {
-  external UnnamedUnion13 unnamed;
+  external UnnamedUnion10 unnamed;
 
   @ffi.Uint32()
   external int Nl;
@@ -24415,7 +23899,7 @@ final class sha_state_st extends ffi.Struct {
   external int num;
 }
 
-final class UnnamedUnion13 extends ffi.Union {
+final class UnnamedUnion10 extends ffi.Union {
   @ffi.Array.multi([5])
   external ffi.Array<ffi.Uint32> h;
 
@@ -24467,20 +23951,20 @@ final class sha512_state_st extends ffi.Struct {
   @ffi.Array.multi([8])
   external ffi.Array<ffi.Uint64> h;
 
-  @ffi.Uint16()
-  external int num;
-
-  @ffi.Uint16()
-  external int md_len;
-
-  @ffi.Uint32()
-  external int bytes_so_far_high;
+  @ffi.Uint64()
+  external int Nl;
 
   @ffi.Uint64()
-  external int bytes_so_far_low;
+  external int Nh;
 
   @ffi.Array.multi([128])
   external ffi.Array<ffi.Uint8> p;
+
+  @ffi.UnsignedInt()
+  external int num;
+
+  @ffi.UnsignedInt()
+  external int md_len;
 }
 
 typedef EVP_CIPHER_CTX = evp_cipher_ctx_st;
@@ -24624,89 +24108,6 @@ final class evp_hpke_ctx_st extends ffi.Struct {
 
   @ffi.Int()
   external int is_sender;
-}
-
-final class KYBER_public_key extends ffi.Struct {
-  external UnnamedUnion14 opaque;
-}
-
-final class UnnamedUnion14 extends ffi.Union {
-  @ffi.Array.multi([6208])
-  external ffi.Array<ffi.Uint8> bytes;
-
-  @ffi.Uint16()
-  external int alignment;
-}
-
-final class KYBER_private_key extends ffi.Struct {
-  external UnnamedUnion15 opaque;
-}
-
-final class UnnamedUnion15 extends ffi.Union {
-  @ffi.Array.multi([7776])
-  external ffi.Array<ffi.Uint8> bytes;
-
-  @ffi.Uint16()
-  external int alignment;
-}
-
-enum boringssl_keccak_config_t {
-  boringssl_sha3_256(0),
-  boringssl_sha3_512(1),
-  boringssl_shake128(2),
-  boringssl_shake256(3);
-
-  final int value;
-  const boringssl_keccak_config_t(this.value);
-
-  static boringssl_keccak_config_t fromValue(int value) => switch (value) {
-    0 => boringssl_sha3_256,
-    1 => boringssl_sha3_512,
-    2 => boringssl_shake128,
-    3 => boringssl_shake256,
-    _ => throw ArgumentError(
-      "Unknown value for boringssl_keccak_config_t: $value",
-    ),
-  };
-}
-
-enum boringssl_keccak_phase_t {
-  boringssl_keccak_phase_absorb(0),
-  boringssl_keccak_phase_squeeze(1);
-
-  final int value;
-  const boringssl_keccak_phase_t(this.value);
-
-  static boringssl_keccak_phase_t fromValue(int value) => switch (value) {
-    0 => boringssl_keccak_phase_absorb,
-    1 => boringssl_keccak_phase_squeeze,
-    _ => throw ArgumentError(
-      "Unknown value for boringssl_keccak_phase_t: $value",
-    ),
-  };
-}
-
-final class BORINGSSL_keccak_st extends ffi.Struct {
-  @ffi.Array.multi([25])
-  external ffi.Array<ffi.Uint64> state;
-
-  @ffi.Int32()
-  external int config;
-
-  @ffi.Int32()
-  external int phase;
-
-  @ffi.Size()
-  external int required_out_len;
-
-  @ffi.Size()
-  external int rate_bytes;
-
-  @ffi.Size()
-  external int absorb_offset;
-
-  @ffi.Size()
-  external int squeeze_offset;
 }
 
 const int ERR_LIB_NONE = 1;
@@ -25513,8 +24914,6 @@ const int OPENSSL_HEADER_MLDSA_H_ = 1;
 
 const int MLDSA_SEED_BYTES = 32;
 
-const int MLDSA_MU_BYTES = 64;
-
 const int MLDSA65_PRIVATE_KEY_BYTES = 4032;
 
 const int MLDSA65_PUBLIC_KEY_BYTES = 1952;
@@ -25554,10 +24953,6 @@ const int RSA_NO_PADDING = 3;
 const int RSA_PKCS1_OAEP_PADDING = 4;
 
 const int RSA_PKCS1_PSS_PADDING = 6;
-
-const int RSA_PSS_SALTLEN_DIGEST = -1;
-
-const int RSA_PSS_SALTLEN_AUTO = -2;
 
 const int RSA_FLAG_OPAQUE = 1;
 
@@ -25710,8 +25105,6 @@ const int EVP_MD_FLAG_DIGALGID_ABSENT = 2;
 const int EVP_MD_FLAG_XOF = 4;
 
 const int EVP_MD_CTX_FLAG_NON_FIPS_ALLOW = 0;
-
-const int EVP_MAX_MD_DATA_SIZE = 208;
 
 const int DIGEST_R_INPUT_NOT_INITIALIZED = 100;
 
@@ -25934,17 +25327,3 @@ const int EVP_PKEY_HKDEF_MODE_EXTRACT_AND_EXPAND = 0;
 const int EVP_PKEY_HKDEF_MODE_EXTRACT_ONLY = 1;
 
 const int EVP_PKEY_HKDEF_MODE_EXPAND_ONLY = 2;
-
-const int OPENSSL_HEADER_KYBER_H = 1;
-
-const int KYBER_PUBLIC_KEY_BYTES = 1184;
-
-const int KYBER_SHARED_SECRET_BYTES = 32;
-
-const int KYBER_CIPHERTEXT_BYTES = 1088;
-
-const int KYBER_PRIVATE_KEY_BYTES = 2400;
-
-const int KYBER_ENCAP_ENTROPY = 32;
-
-const int KYBER_GENERATE_KEY_ENTROPY = 64;

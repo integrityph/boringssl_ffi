@@ -79,11 +79,16 @@ headers:
     - 'src/build/_deps/boringssl-src/include/openssl/evp.h'
     - 'src/build/_deps/boringssl-src/include/openssl/hpke.h'
     - 'src/build/_deps/boringssl-src/include/openssl/kdf.h'
-    - 'src/build/_deps/boringssl-src/include/openssl/kyber.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/experimental/kyber.h'
+    - 'src/build/_deps/boringssl-src/include/openssl/experimental/kyber.h'
+    - 'src/build/_deps/boringssl-src/crypto/kyber/internal.h'
+    - 'src/build/_deps/boringssl-src/crypto/fipsmodule/keccak/internal.h'
     # - 'src/build/_deps/boringssl-src/include/openssl/ssl.h'
 
   include-directives:
     - 'src/build/_deps/boringssl-src/include/**/*.h'
+    - 'src/build/_deps/boringssl-src/crypto/kyber/internal.h'
+    - 'src/build/_deps/boringssl-src/crypto/fipsmodule/keccak/internal.h'
 
 # Update the compiler options to use the same path.
 compiler-opts:
@@ -97,8 +102,11 @@ compiler-opts:
   - '-DERR_LIB_FIPS=0'
   - '-DERR_LIB_TS=0'
   - '-DERR_LIB_JPAKE=0'
-  - '-DBORINGSSL_PREFIX=BSLL'
-  - '-DBORINGSSL_PREFIX_SYMBOLS=symbols.txt'
+  - '-fno-spell-checking'
+  - '-fspell-checking-limit=1'
+  - '-DOPENSSL_UNSTABLE_EXPERIMENTAL_KYBER=1'
+  # - '-DBORINGSSL_PREFIX=BSLL'
+  # - '-DBORINGSSL_PREFIX_SYMBOLS=src/symbols.txt'
 
 # --- Filtering (Highly Recommended) ---
 functions:
@@ -126,3 +134,5 @@ preamble: |
 comments:
   style: doxygen
   length: brief
+  # style: any
+  # length: full
