@@ -21,7 +21,6 @@ find_package(Threads REQUIRED)
 FetchContent_Declare(
     boringssl
     GIT_REPOSITORY https://boringssl.googlesource.com/boringssl
-    # GIT_TAG        0.20250514.0
 		GIT_TAG        0.20250701.0
 )
 FetchContent_MakeAvailable(boringssl)
