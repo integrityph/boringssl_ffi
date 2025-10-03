@@ -39,6 +39,11 @@ add_library(boringssl_ffi SHARED
 		$<TARGET_OBJECTS:fipsmodule>
 )
 
+# add support for 16kb page only for Android
+if(CMAKE_SYSTEM_NAME STREQUAL "Android")
+    target_link_options(boringssl_ffi PRIVATE "-Wl,-z,max-page-size=0x4000")
+endif()
+
 # We still need to make the include directory available.
 target_include_directories(boringssl_ffi PRIVATE
     ${boringssl_SOURCE_DIR}/include

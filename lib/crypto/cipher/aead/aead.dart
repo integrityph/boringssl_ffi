@@ -1,1 +1,1 @@
-export 'aead_main.dart' hide AEAD;
+export 'aead_main.dart' hide AEAD, AEADSession;
