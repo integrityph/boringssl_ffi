@@ -13,7 +13,7 @@ A Flutter FFI plugin that integrates BoringSSL for iOS device (arm64) builds.
 
   s.source_files = '../src/**/*'
   s.vendored_frameworks = 'Frameworks/boringssl_ffi.xcframework'
-  s.platform = :ios, '15.6'
+  s.platform = :ios, '12.0'
 
   s.prepare_command = <<-CMD
   set -ex # Exit immediately on error, echo commands
