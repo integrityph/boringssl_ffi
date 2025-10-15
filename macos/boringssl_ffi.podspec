@@ -84,8 +84,8 @@ A new Flutter FFI plugin project.
   echo "--- Starting CMake build for boringssl_ffi ---"
   
   CMAKE_BUILD_DIR="build"
-  #rm -rf "$CMAKE_BUILD_DIR" # Clean build directory
-  #mkdir -p "$CMAKE_BUILD_DIR"
+  rm -rf "$CMAKE_BUILD_DIR" # Clean build directory
+  mkdir -p "$CMAKE_BUILD_DIR"
   
   # We now explicitly pass the architecture to CMake.
   cmake -S "../src" -B "$CMAKE_BUILD_DIR" -DCMAKE_OSX_ARCHITECTURES="$(uname -m)" -DCMAKE_OSX_SYSROOT=macosx

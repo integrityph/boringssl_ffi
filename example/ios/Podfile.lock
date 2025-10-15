@@ -2,21 +2,27 @@ PODS:
   - boringssl_ffi (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - integration_test (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - boringssl_ffi (from `.symlinks/plugins/boringssl_ffi/ios`)
   - Flutter (from `Flutter`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
 
 EXTERNAL SOURCES:
   boringssl_ffi:
     :path: ".symlinks/plugins/boringssl_ffi/ios"
   Flutter:
     :path: Flutter
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
 
 SPEC CHECKSUMS:
-  boringssl_ffi: be79a8f6e95ce6402fcd1105765cc66768fdb906
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  boringssl_ffi: 3e9691e52108572a56cd0f39fde0d5440571b5b1
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
 
-PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
+PODFILE CHECKSUM: 3c63482e143d1b91d2d2560aee9fb04ecc74ac7e
 
 COCOAPODS: 1.16.2

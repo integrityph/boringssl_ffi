@@ -17,6 +17,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _boringSslVersion = 'Unknown';
   String _boringSslsha256 = 'Unknown';
+  String _boringSslHMAC = 'Unknown';
   String _boringSslsha256Benchmark = 'Unknown';
 
   @override
@@ -29,12 +30,15 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     String versionVal;
     String sha256Val;
+    String HMACVal;
     try {
       versionVal = "XXX";
       sha256Val = hex.encode(sha256.hash([1,2,3])??[]);
+      HMACVal = hex.encode(hmac.hmacSHA512([1,2,3],[1,2,3])??[0]);
     } catch (e) {
       versionVal = 'Failed to get version: ${e.toString()}';
       sha256Val = 'Failed to get SHA256: ${e.toString()}';
+      HMACVal = 'Failed to get HAMC_SHA512: ${e.toString()}';
     }
 
     if (!mounted) return;
@@ -42,6 +46,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _boringSslVersion = versionVal;
       _boringSslsha256 = sha256Val;
+      _boringSslHMAC =  HMACVal;
     });
   }
 
@@ -73,6 +78,11 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(height: 16),
               Text(
                 _boringSslsha256,
+                style: const TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                _boringSslHMAC,
                 style: const TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),

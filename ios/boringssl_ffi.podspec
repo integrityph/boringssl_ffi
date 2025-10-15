@@ -28,7 +28,7 @@ A Flutter FFI plugin that integrates BoringSSL for iOS device (arm64) builds.
   fi
 
   CMAKE_BUILD_DIR="build"
-  #rm -rf "$CMAKE_BUILD_DIR" # Clean build directory
+  rm -rf "$CMAKE_BUILD_DIR" # Clean build directory
   mkdir -p "$CMAKE_BUILD_DIR"
 
   cmake -S "../src" \

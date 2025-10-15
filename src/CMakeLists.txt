@@ -35,7 +35,7 @@ message(${CMAKE_BINARY_DIR})
 add_library(boringssl_ffi SHARED
     $<TARGET_OBJECTS:crypto>
     $<TARGET_OBJECTS:ssl>
-		$<TARGET_OBJECTS:fipsmodule>
+	$<TARGET_OBJECTS:fipsmodule>
 )
 
 # add support for 16kb page only for Android
@@ -51,7 +51,7 @@ target_include_directories(boringssl_ffi PRIVATE
 target_link_libraries(boringssl_ffi PRIVATE
     ssl
     crypto
-		fipsmodule
+	fipsmodule
     Threads::Threads # BoringSSL also depends on pthreads, which CMake abstracts as Threads::Threads
 )
 
