@@ -73,6 +73,8 @@ A Flutter FFI plugin that integrates BoringSSL for iOS device (arm64) builds.
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+  <key>MinimumOSVersion</key>
+  <string>15.6</string>
 </dict>
 </plist>
 EOF
