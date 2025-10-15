@@ -34,6 +34,7 @@ A Flutter FFI plugin that integrates BoringSSL for iOS device (arm64) builds.
   cmake -S "../src" \
         -B "$CMAKE_BUILD_DIR" \
         -DCMAKE_OSX_ARCHITECTURES="arm64" \
+        -DCMAKE_OSX_DEPLOYMENT_TARGET="12.0" \
         -DCMAKE_OSX_SYSROOT="iphoneos" \
         -GNinja
   

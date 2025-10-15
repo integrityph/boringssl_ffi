@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/integration_test/ios"
 
 SPEC CHECKSUMS:
-  boringssl_ffi: 6b5373e9c2a11e1cd7ba9675f7189bbff9214953
+  boringssl_ffi: aca063885bb850f1f72e095535356934df99cedd
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
 
