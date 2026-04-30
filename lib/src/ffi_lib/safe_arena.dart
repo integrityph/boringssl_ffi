@@ -28,4 +28,8 @@ class SafeArena {
     }
     _internalArena.releaseAll();
   }
+
+  T using<T>(T resource, void Function(T) releaseCallback) {
+    return _internalArena.using(resource, releaseCallback);
+  }
 }

@@ -15,12 +15,21 @@ Function() makeTest(
   String keyValueSeparator = ":",
   String unnamedTagKey = "",
   bool isJSON = false,
+  Iterable<dynamic> Function(dynamic decodedJson)? jsonExtractor,
 }) {
   return () {
     group(name, () {
       List<Map<String, dynamic>> testVectors;
       if (isJSON) {
-        testVectors = (jsonDecode(testVector) as List<dynamic>).map<Map<String, dynamic>>((sample)=>sample).toList();
+        final decoded = jsonDecode(testVector);
+        
+        // 1. Extract the iterable list using the callback (or default to raw list)
+        final Iterable<dynamic> rawList = jsonExtractor != null 
+            ? jsonExtractor(decoded) 
+            : (decoded as List<dynamic>);
+            
+        // 2. Cast to the expected Map format
+        testVectors = rawList.map<Map<String, dynamic>>((sample) => sample as Map<String, dynamic>).toList();
       } else {
         testVectors = keyValueToJSON(
         testVector,
@@ -46,11 +55,11 @@ Function() makeTest(
         test(testVector['_name'], () {
           try {
             testFunc(testVector);
-          } catch (e) {
+          } catch (e, stack) {
             prettyPrintJSON(testVector);
             logger.configure(showStackTraces: true);
             logger.log(
-              "error in unit test ${testVector['_name']}: $e\n${Trace.current()}",
+              "error in unit test ${testVector['_name']}: $e\n${Trace.current()}\nSTACK:\n$stack",
             );
             failCount++;
             rethrow;

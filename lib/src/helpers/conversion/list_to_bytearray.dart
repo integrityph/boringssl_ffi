@@ -5,9 +5,8 @@ extension IntListToUint8List on List<int> {
     if (this is Uint8List) {
       return this as Uint8List;
     }
-
     final builder = BytesBuilder();
-
+    
     for (final int value in this) {
       if (value >= 0) {
         // This handles positive numbers
