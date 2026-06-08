@@ -43,3 +43,6 @@ flutter:
 platforms:
   android:
   ios:
+
+false_secrets:
+- /test/
