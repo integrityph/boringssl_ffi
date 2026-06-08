@@ -1,7 +1,7 @@
 name: boringssl_ffi
 description: "BoringSSL FFI Plugin"
-version: 0.0.1
-homepage:
+version: 1.0.0
+repository: https://github.com/integrityph/boringssl_ffi
 
 environment:
   sdk: ^3.8.1

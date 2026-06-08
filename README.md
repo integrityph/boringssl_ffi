@@ -1,96 +1,101 @@
-# boringssl_ffi
+# BoringSSL FFI
 
-BoringSSL FFI Plugin
+A high-performance, idiomatically crafted Dart FFI wrapper for Google's BoringSSL.
+
+This package brings the raw speed and battle-tested security of BoringSSL to Dart and Flutter applications. It is designed with a deeply curated, discoverable API that prioritizes developer ergonomics and compile-time safety.
+
+## Why BoringSSL FFI instead of pure Dart cryptography?
+
+Dart's native `package:crypto` and `pointycastle` are fantastic, but because they are written in pure Dart, they execute on the Dart VM or compile to JavaScript. 
+
+**BoringSSL FFI binds directly to native C/Assembly code.** This provides massive advantages:
+* **Blazing Fast:** Heavy cryptographic operations execute orders of magnitude faster. 
+* **UI-Thread Friendly:** Operations like PBKDF2 or heavy AES-GCM encryption that would normally cause frame drops in pure Dart can often be run synchronously on the main thread without stuttering.
+* **Standardized:** BoringSSL is Google's fork of OpenSSL, used in Google Chrome, Android, and countless enterprise systems.
+
+## The API Philosophy
+
+Cryptography APIs are notoriously difficult to navigate. This package uses a strictly typed, hierarchical namespace designed for your IDE's IntelliSense. 
+
+Instead of passing stringly-typed algorithm names into generic functions, you simply type `bssl.` and let the IDE guide you to exactly what you need.
 
 ## Getting Started
 
-This project is a starting point for a Flutter
-[FFI plugin](https://flutter.dev/to/ffi-package),
-a specialized package that includes native code directly invoked with Dart FFI.
-
-## Project structure
-
-This template uses the following structure:
-
-* `src`: Contains the native source code, and a CmakeFile.txt file for building
-  that source code into a dynamic library.
-
-* `lib`: Contains the Dart code that defines the API of the plugin, and which
-  calls into the native code using `dart:ffi`.
-
-* platform folders (`android`, `ios`, `windows`, etc.): Contains the build files
-  for building and bundling the native code library with the platform application.
-
-## Building and bundling native code
-
-The `pubspec.yaml` specifies FFI plugins as follows:
-
+Add the package to your `pubspec.yaml`:
 ```yaml
-  plugin:
-    platforms:
-      some_platform:
-        ffiPlugin: true
+dependencies:
+  boringssl_ffi: ^1.0.0
 ```
 
-This configuration invokes the native build for the various target platforms
-and bundles the binaries in Flutter applications using these FFI plugins.
+## Cookbook
 
-This can be combined with dartPluginClass, such as when FFI is used for the
-implementation of one platform in a federated plugin:
+### 1. Hashing (SHA-256)
 
-```yaml
-  plugin:
-    implements: some_other_plugin
-    platforms:
-      some_platform:
-        dartPluginClass: SomeClass
-        ffiPlugin: true
+```dart
+final data = utf8.encode('my secret data');
+
+// Clean, predictable API path
+final hash = bssl.sha256.hash(data);
+
+print(bssl.hex.encode(hash));
 ```
 
-A plugin can have both FFI and method channels:
+### 2. Key Derivation (PBKDF2)
 
-```yaml
-  plugin:
-    platforms:
-      some_platform:
-        pluginClass: SomeName
-        ffiPlugin: true
+```dart
+final password = utf8.encode('password123');
+final salt = utf8.encode('random_salt');
+
+// Derive a 32-byte key using SHA-512 with 100,000 iterations
+final derivedKey = bssl.pbkdf2HMAC.deriveKeySHA512(
+  password: password, 
+  salt: salt, 
+  iterations: 100000, 
+  keyLength: 32,
+);
 ```
 
-The native build systems that are invoked by FFI (and method channel) plugins are:
+### 3. Authenticated Encryption (AES-GCM)
 
-* For Android: Gradle, which invokes the Android NDK for native builds.
-  * See the documentation in android/build.gradle.
-* For iOS and MacOS: Xcode, via CocoaPods.
-  * See the documentation in ios/boringssl_ffi.podspec.
-  * See the documentation in macos/boringssl_ffi.podspec.
-* For Linux and Windows: CMake.
-  * See the documentation in linux/CMakeLists.txt.
-  * See the documentation in windows/CMakeLists.txt.
+```dart
+final plaintext = utf8.encode('Transfer $100');
+final key = bssl.rand.bytes(32); // 256-bit key
+final nonce = bssl.rand.bytes(12);
+final additionalData = utf8.encode('header_info');
 
-## Binding to native code
+// Encrypt
+final ciphertext = bssl.aead.sealAES_GCM(
+  plaintext: plaintext,
+  additionalData: additionalData,
+  key: key,
+  nonce: nonce,
+);
 
-To use the native code, bindings in Dart are needed.
-To avoid writing these by hand, they are generated from the header file
-(`src/boringssl_ffi.h`) by `package:ffigen`.
-Regenerate the bindings by running `dart run ffigen --config ffigen.yaml`.
+// Decrypt
+final decrypted = bssl.aead.openAES_GCM(
+  ciphertext: ciphertext,
+  additionalData: additionalData,
+  key: key,
+  nonce: nonce,
+);```
 
-## Invoking native code
+### 4. HMAC
 
-Very short-running native functions can be directly invoked from any isolate.
-For example, see `sum` in `lib/boringssl_ffi.dart`.
+```dart
+final key = utf8.encode('shared_secret');
+final message = utf8.encode('verify me');
 
-Longer-running functions should be invoked on a helper isolate to avoid
-dropping frames in Flutter applications.
-For example, see `sumAsync` in `lib/boringssl_ffi.dart`.
+final mac = bssl.hmac.hmacSHA512(key: key, data: message);
+```
 
-## Flutter help
+## Performance & Isolates
 
-For help getting started with Flutter, view our
-[online documentation](https://docs.flutter.dev), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Because this package uses FFI, the cryptographic math executes outside the Dart VM. For the vast majority of use cases, you can call these functions synchronously on the main thread.
 
-The plugin project was generated without specifying the `--platforms` flag, so no platforms are currently supported.
-To add platforms, run `flutter create -t plugin_ffi --platforms <platforms> .` in this directory.
-You can also find a detailed instruction on how to add platforms in the `pubspec.yaml` at https://flutter.dev/to/pubspec-plugin-platforms.
-# BoringSSL FFI
+However, if you are hashing multi-gigabyte files or running extreme iteration counts for KDFs, you should still wrap the call in Isolate.run() to keep your Flutter UI perfectly smooth.
+
+## Security Concerns
+
+For security reports, submit a private security advisory:
+
+https://github.com/integrityph/boringssl_ffi/security/advisories/new
