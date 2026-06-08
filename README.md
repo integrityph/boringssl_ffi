@@ -59,8 +59,9 @@ final derivedKey = bssl.pbkdf2HMAC.deriveKeySHA512(
 
 ```dart
 final plaintext = utf8.encode('Transfer $100');
-final key = bssl.rand.bytes(32); // 256-bit key
-final nonce = bssl.rand.bytes(12);
+final rand = Random.secure();
+final key = List.generate(32, (_)=>rand.nextInt(256)); // 256-bit key
+final nonce = List.generate(12, (_)=>rand.nextInt(256));
 final additionalData = utf8.encode('header_info');
 
 // Encrypt
@@ -77,7 +78,8 @@ final decrypted = bssl.aead.openAES_GCM(
   additionalData: additionalData,
   key: key,
   nonce: nonce,
-);```
+);
+```
 
 ### 4. HMAC
 
