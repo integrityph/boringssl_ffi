@@ -32,6 +32,8 @@ dependencies:
 ### 1. Hashing (SHA-256)
 
 ```dart
+import 'package:boringssl_ffi/boringssl_ffi.dart';
+
 final data = utf8.encode('my secret data');
 
 // Clean, predictable API path
@@ -43,6 +45,8 @@ print(bssl.hex.encode(hash));
 ### 2. Key Derivation (PBKDF2)
 
 ```dart
+import 'package:boringssl_ffi/boringssl_ffi.dart';
+
 final password = utf8.encode('password123');
 final salt = utf8.encode('random_salt');
 
@@ -58,6 +62,8 @@ final derivedKey = bssl.pbkdf2HMAC.deriveKeySHA512(
 ### 3. Authenticated Encryption (AES-GCM)
 
 ```dart
+import 'package:boringssl_ffi/boringssl_ffi.dart';
+
 final plaintext = utf8.encode('Transfer $100');
 final rand = Random.secure();
 final key = List.generate(32, (_)=>rand.nextInt(256)); // 256-bit key
@@ -84,6 +90,8 @@ final decrypted = bssl.aead.openAES_GCM(
 ### 4. HMAC
 
 ```dart
+import 'package:boringssl_ffi/boringssl_ffi.dart';
+
 final key = utf8.encode('shared_secret');
 final message = utf8.encode('verify me');
 
