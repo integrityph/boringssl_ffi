@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:boringssl_ffi/boringssl_ffi.dart' as boringssl_ffi;
+import 'package:boringssl_ffi/boringssl_ffi.dart';
 import 'package:boringssl_ffi_example/benchmarks/run_benchmark.dart';
 
 Future<double> benchmarkSHA256(int iterations) async {
@@ -16,7 +16,7 @@ Future<double> benchmarkSHA256(int iterations) async {
 
   for (final testVector in testVectors) {
     final input = (testVector['input'] as String).codeUnits;
-    final v = await runBenchmark(testVector['name'], (){boringssl_ffi.sha256.hash(input);}, iterations);
+    final v = await runBenchmark(testVector['name'], (){bssl.sha256.hash(input);}, iterations);
     times.add(v);
   }
   final double sumMs = times.reduce((a, b) => a + b);

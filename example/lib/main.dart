@@ -33,8 +33,8 @@ class _MyAppState extends State<MyApp> {
     String HMACVal;
     try {
       versionVal = "XXX";
-      sha256Val = hex.encode(sha256.hash([1,2,3])??[]);
-      HMACVal = hex.encode(hmac.hmacSHA512([1,2,3],[1,2,3])??[0]);
+      sha256Val = bssl.hex.encode(bssl.sha256.hash([1,2,3])??[]);
+      HMACVal = bssl.hex.encode(bssl.hmac.hmacSHA512([1,2,3],[1,2,3])??[0]);
     } catch (e) {
       versionVal = 'Failed to get version: ${e.toString()}';
       sha256Val = 'Failed to get SHA256: ${e.toString()}';
