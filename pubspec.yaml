@@ -39,3 +39,7 @@ flutter:
         ffiPlugin: true
       windows:
         ffiPlugin: true
+
+platforms:
+  android:
+  ios:
